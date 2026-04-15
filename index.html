@@ -3,94 +3,92 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Birthday Message</title>
+<title>Birthday</title>
 
 <style>
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  color: white;
-  overflow-x: hidden;
-  background: linear-gradient(to bottom, #061a40, #0b2a6f);
+body{
+  margin:0;
+  font-family: Arial;
+  color:white;
+  background: linear-gradient(to bottom,#050b2c,#0b2a6f);
+  overflow:hidden;
 }
 
-/* STARS */
-.stars {
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  z-index: 0;
+/* stars */
+.stars{
+  position:fixed;
+  width:100%;
+  height:100%;
+  z-index:0;
 }
 
-.star {
-  position: absolute;
-  width: 2px;
-  height: 2px;
-  background: white;
-  border-radius: 50%;
-  animation: twinkle 3s infinite ease-in-out;
+.star{
+  position:absolute;
+  width:2px;
+  height:2px;
+  background:white;
+  border-radius:50%;
+  animation: twinkle 3s infinite;
 }
 
-@keyframes twinkle {
-  0%,100% {opacity:0.2;}
-  50% {opacity:1;}
+@keyframes twinkle{
+  0%,100%{opacity:0.2}
+  50%{opacity:1}
 }
 
-/* SLIDES */
-.slide {
-  position: absolute;
-  width: 100%;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  padding: 20px;
-  box-sizing: border-box;
-  z-index: 2;
+/* slide fix IMPORTANT */
+.slide{
+  position:absolute;
+  width:100%;
+  height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  padding:20px;
+  box-sizing:border-box;
+  z-index:2;
+  background: rgba(0,0,0,0.25); /* 👈 ده اللي بيخلي كل حاجة تبان */
 }
 
-h1 { font-size: 34px; }
-p {
-  font-size: 22px;
-  max-width: 90%;
-  line-height: 1.7;
+.hidden{display:none;}
+
+h1{font-size:32px;}
+p{font-size:20px;line-height:1.6;max-width:90%;}
+
+button{
+  margin-top:20px;
+  padding:10px 18px;
+  border:none;
+  border-radius:20px;
+  background:absolute;
+  color:#0b2a6f;
+  font-weight:bold;
 }
 
-button {
-  margin-top: 20px;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 20px;
-  background: white;
-  color: #0b2a6f;
-  font-weight: bold;
+.img-row{
+  display:flex;
+  gap:10px;
+  margin-top:10px;
 }
 
-/* images */
-.img-row {
-  display: flex;
-  gap: 10px;
-  margin-top: 15px;
-}
-
-.img-box {
-  width: 90px;
-  height: 90px;
-  border: 2px solid white;
-  border-radius: 12px;
+.img-box{
+  width:90px;
+  height:90px;
+  border:2px solid white;
+  border-radius:10px;
   display:flex;
   align-items:center;
   justify-content:center;
-  font-size: 12px;
+  font-size:12px;
 }
 
-.hidden {display:none;}
-#finalText {
-  font-size: 42px;
-  opacity: 0;
-  transition: 2s;
+/* final text */
+#finalText{
+  font-size:42px;
+  opacity:0;
+  transition:2s;
 }
 </style>
 </head>
@@ -101,8 +99,8 @@ button {
 
 <!-- 1 -->
 <div class="slide" id="s1">
-  <h1>Happy Birthday to the most amazing person ever ✨</h1>
-  <p>I don’t know if you’ll ever know who this is, but I hope you feel this.</p>
+  <h1>Happy Birthday ✨</h1>
+  <p>To the most amazing person ever</p>
   <button onclick="next(1)">Start</button>
 </div>
 
@@ -110,34 +108,24 @@ button {
 <div class="slide hidden" id="s2">
   <h1>💌</h1>
   <p>
-  I just wanted to say that you’ve always been someone really special to me.<br><br>
+  I don’t know if you’ll ever know who this is… but I hope you feel this.<br><br>
 
-  You changed something in my life without even trying… you made life feel lighter, better.<br><br>
+  You changed my life without even trying.<br>
+  There’s something about you that feels unforgettable.<br><br>
 
-  <b>There’s something about you that feels unforgettable.</b><br><br>
-
-  You’re not like everyone else and I hope you never become like them.<br><br>
-
-  I’ll keep our moments to myself… but they meant more than you know.
+  You’re not like anyone else… and I hope you never become like them.
   </p>
   <button onclick="next(2)">Next</button>
 </div>
 
 <!-- 3 -->
 <div class="slide hidden" id="s3">
-  <h1>Things I love about you 💙</h1>
-  <p>
-    Your smile.<br>
-    The way you talk.<br>
-    Your kindness.<br>
-    The mark on your hand.<br>
-    Your scent.<br>
-    Your music taste.
-  </p>
+  <h1>Things I love 💙</h1>
+  <p>Your smile, your voice, your kindness, your music taste</p>
 
   <div class="img-row">
     <div class="img-box">Smile (2)</div>
-    <div class="img-box">Mark (1)</div>
+    <div class="img-box">Hand mark (1)</div>
     <div class="img-box">Music (3)</div>
   </div>
 
@@ -146,68 +134,50 @@ button {
 
 <!-- 4 -->
 <div class="slide hidden" id="s4">
-  <h1>🌙</h1>
   <p>
-  You’ll always be someone important to me.<br><br>
-  You were good to me… I’ll never forget that.<br><br>
-  You were more than just someone… you were home.
+  You were more than someone…<br>
+  you were home.
   </p>
   <button onclick="next(4)">Next</button>
 </div>
 
 <!-- 5 -->
 <div class="slide hidden" id="s5">
-  <h1>🌍</h1>
   <p>
-  I hope life is kind to you.<br><br>
-  I hope you never feel alone.<br><br>
-  I hope your future is everything you dream of…<br>
-  success, travel, money, laughter, and peace.
+  I hope life is kind to you.<br>
+  I hope you never feel alone.<br>
+  I hope you get everything you dream of.
   </p>
-  <button onclick="next(5)">Next</button>
+  <button onclick="next(5)">Finish</button>
 </div>
 
-<!-- EMPTY -->
-<div class="slide hidden" id="s6"></div>
-
 <!-- FINAL -->
-<div class="slide hidden" id="s7">
+<div class="slide hidden" id="s6">
   <div id="finalText">You were home.</div>
 </div>
 
 <script>
 
-// stars
-const stars = document.getElementById("stars");
-for(let i=0;i<120;i++){
-  let s = document.createElement("div");
+/* stars */
+const stars=document.getElementById("stars");
+for(let i=0;i<100;i++){
+  let s=document.createElement("div");
   s.className="star";
-  s.style.top = Math.random()*100+"%";
-  s.style.left = Math.random()*100+"%";
-  s.style.animationDuration = (2+Math.random()*3)+"s";
+  s.style.top=Math.random()*100+"%";
+  s.style.left=Math.random()*100+"%";
+  s.style.animationDuration=(2+Math.random()*3)+"s";
   stars.appendChild(s);
 }
 
-// navigation
+/* navigation */
 function next(n){
   document.getElementById("s"+n).classList.add("hidden");
   document.getElementById("s"+(n+1)).classList.remove("hidden");
 
-  if(n === 5){
+  if(n===5){
     setTimeout(()=>{
-      document.getElementById("s6").classList.remove("hidden");
-
-      setTimeout(()=>{
-        document.getElementById("s6").classList.add("hidden");
-        document.getElementById("s7").classList.remove("hidden");
-
-        setTimeout(()=>{
-          document.getElementById("finalText").style.opacity = 1;
-        },500);
-
-      },2000);
-
-    },800);
+      document.getElementById("finalText").style.opacity=1;
+    },500);
   }
 }
 
