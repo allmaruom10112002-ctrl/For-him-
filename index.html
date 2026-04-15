@@ -1,238 +1,214 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>For You</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Birthday Message</title>
 
 <style>
 body {
   margin: 0;
-  font-family: 'Segoe UI', sans-serif;
+  font-family: Arial, sans-serif;
   color: white;
-  overflow: hidden;
-  background: radial-gradient(circle at bottom, #020b2d, #000000);
+  overflow-x: hidden;
+  background: linear-gradient(to bottom, #061a40, #0b2a6f);
 }
 
-/* 🌌 نجوم حقيقية */
-.stars, .stars2 {
-  position: fixed;
-  width: 200%;
-  height: 200%;
-  background-repeat: repeat;
-  z-index: -2;
-}
-
+/* STARS */
 .stars {
-  background-image: url('https://raw.githubusercontent.com/VincentGarreau/particles.js/master/demo/media/star.png');
-  animation: moveStars 120s linear infinite;
-  opacity: 0.6;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
 }
 
-.stars2 {
-  background-image: url('https://raw.githubusercontent.com/VincentGarreau/particles.js/master/demo/media/star.png');
-  animation: moveStars 200s linear infinite;
-  opacity: 0.3;
+.star {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: white;
+  border-radius: 50%;
+  animation: twinkle 3s infinite ease-in-out;
 }
 
-@keyframes moveStars {
-  from {transform: translate(0,0);}
-  to {transform: translate(-500px,-1000px);}
-}
-
-/* الصفحات */
-.page {
-  display: none;
-  height: 100vh;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  padding: 25px;
-  text-align: center;
-}
-
-.active {display:flex;}
-
-p {
-  font-size: 26px;
-  max-width: 900px;
-  line-height: 2;
-}
-
-/* زرار */
-button {
-  margin-top: 20px;
-  padding: 12px 25px;
-  border: none;
-  background: #ff4d6d;
-  color: white;
-  border-radius: 20px;
-  font-size: 16px;
+@keyframes twinkle {
+  0%,100% {opacity:0.2;}
+  50% {opacity:1;}
 }
 
 /* SLIDES */
 .slide {
-  display: none;
-  font-size: 28px;
-  transition: 0.5s ease;
-}
-
-.slide.active {display:block;}
-
-img {
-  width: 260px;
-  border-radius: 15px;
-  margin-top: 12px;
-  box-shadow: 0 0 20px rgba(255,255,255,0.1);
-}
-
-/* intro */
-#intro {
-  position: fixed;
+  position: absolute;
   width: 100%;
   height: 100vh;
-  background: black;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  z-index: 10;
-  animation: fadeIntro 3s forwards;
+  text-align: center;
+  padding: 20px;
+  box-sizing: border-box;
+  z-index: 2;
 }
 
-#intro h1 {
+h1 { font-size: 34px; }
+p {
   font-size: 22px;
+  max-width: 90%;
+  line-height: 1.7;
 }
 
-@keyframes fadeIntro {
-  0% {opacity:1;}
-  100% {opacity:0; visibility:hidden;}
+button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 20px;
+  background: white;
+  color: #0b2a6f;
+  font-weight: bold;
+}
+
+/* images */
+.img-row {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.img-box {
+  width: 90px;
+  height: 90px;
+  border: 2px solid white;
+  border-radius: 12px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size: 12px;
+}
+
+.hidden {display:none;}
+#finalText {
+  font-size: 42px;
+  opacity: 0;
+  transition: 2s;
 }
 </style>
 </head>
 
 <body>
 
-<div class="stars"></div>
-<div class="stars2"></div>
+<div class="stars" id="stars"></div>
 
-<!-- INTRO -->
-<div id="intro">
-  <h1>This is not just a message…</h1>
+<!-- 1 -->
+<div class="slide" id="s1">
+  <h1>Happy Birthday to the most amazing person ever ✨</h1>
+  <p>I don’t know if you’ll ever know who this is, but I hope you feel this.</p>
+  <button onclick="next(1)">Start</button>
 </div>
 
-<audio id="music" loop>
-  <source src="music.mp3">
-</audio>
-
-<!-- PAGE 1 -->
-<div class="page active" id="page1">
-  <p>I don’t know if you’ll ever know who this is… but I hope you feel this.</p>
-  <button onclick="playMusic(); nextPage(2)">Next</button>
-</div>
-
-<!-- PAGE 2 -->
-<div class="page" id="page2">
+<!-- 2 -->
+<div class="slide hidden" id="s2">
+  <h1>💌</h1>
   <p>
-You’ve always been someone really special to me.
-You changed something in my life without even trying.
+  I just wanted to say that you’ve always been someone really special to me.<br><br>
+
+  You changed something in my life without even trying… you made life feel lighter, better.<br><br>
+
+  <b>There’s something about you that feels unforgettable.</b><br><br>
+
+  You’re not like everyone else and I hope you never become like them.<br><br>
+
+  I’ll keep our moments to myself… but they meant more than you know.
   </p>
-  <button onclick="nextPage(3)">Next</button>
+  <button onclick="next(2)">Next</button>
 </div>
 
-<!-- PAGE 3 - SLIDES -->
-<div class="page" id="page3">
+<!-- 3 -->
+<div class="slide hidden" id="s3">
+  <h1>Things I love about you 💙</h1>
+  <p>
+    Your smile.<br>
+    The way you talk.<br>
+    Your kindness.<br>
+    The mark on your hand.<br>
+    Your scent.<br>
+    Your music taste.
+  </p>
 
-<h2>Things I love about Abdelrahman 💌</h2>
+  <div class="img-row">
+    <div class="img-box">Smile (2)</div>
+    <div class="img-box">Mark (1)</div>
+    <div class="img-box">Music (3)</div>
+  </div>
 
-<div class="slide active">
-Your laugh 🤍
-<img src="photo1.jpg">
+  <button onclick="next(3)">Next</button>
 </div>
 
-<div class="slide">
-Your little mole (mark on your hand)
-<img src="photo2.jpg">
+<!-- 4 -->
+<div class="slide hidden" id="s4">
+  <h1>🌙</h1>
+  <p>
+  You’ll always be someone important to me.<br><br>
+  You were good to me… I’ll never forget that.<br><br>
+  You were more than just someone… you were home.
+  </p>
+  <button onclick="next(4)">Next</button>
 </div>
 
-<div class="slide">
-Your scent
-<img src="photo3.jpg">
+<!-- 5 -->
+<div class="slide hidden" id="s5">
+  <h1>🌍</h1>
+  <p>
+  I hope life is kind to you.<br><br>
+  I hope you never feel alone.<br><br>
+  I hope your future is everything you dream of…<br>
+  success, travel, money, laughter, and peace.
+  </p>
+  <button onclick="next(5)">Next</button>
 </div>
 
-<div class="slide">
-Your way of talking
-</div>
+<!-- EMPTY -->
+<div class="slide hidden" id="s6"></div>
 
-<div class="slide">
-Your music taste
-</div>
-
-<div>
-<button onclick="prevSlide()">←</button>
-<button onclick="nextSlide()">→</button>
-</div>
-
-<button onclick="nextPage(4)">Continue</button>
-
-</div>
-
-<!-- EMOTION -->
-<div class="page" id="page4">
-<p>No matter what happens… you were home in a way I can’t explain.</p>
-<button onclick="nextPage(5)">Next</button>
-</div>
-
-<div class="page" id="page5">
-<p>I hope life is kind to you… always.</p>
-<button onclick="nextPage(6)">Next</button>
-</div>
-
-<div class="page" id="page6">
-<p>Maybe we won’t meet again… but I’ll always remember you.</p>
-<button onclick="nextPage(7)">Last</button>
-</div>
-
-<div class="page" id="page7">
-<h2>Some people leave a mark on your life…</h2>
-<h3>and you’re one of them.</h3>
+<!-- FINAL -->
+<div class="slide hidden" id="s7">
+  <div id="finalText">You were home.</div>
 </div>
 
 <script>
 
-/* intro */
-setTimeout(()=>{
-document.getElementById("intro").style.display="none";
-},3000);
-
-/* pages */
-function nextPage(n){
-document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
-document.getElementById("page"+n).classList.add("active");
+// stars
+const stars = document.getElementById("stars");
+for(let i=0;i<120;i++){
+  let s = document.createElement("div");
+  s.className="star";
+  s.style.top = Math.random()*100+"%";
+  s.style.left = Math.random()*100+"%";
+  s.style.animationDuration = (2+Math.random()*3)+"s";
+  stars.appendChild(s);
 }
 
-/* music */
-function playMusic(){
-document.getElementById("music").play();
-}
+// navigation
+function next(n){
+  document.getElementById("s"+n).classList.add("hidden");
+  document.getElementById("s"+(n+1)).classList.remove("hidden");
 
-/* slides */
-let i=0;
-const slides=document.getElementsByClassName("slide");
+  if(n === 5){
+    setTimeout(()=>{
+      document.getElementById("s6").classList.remove("hidden");
 
-function show(){
-for(let s of slides)s.classList.remove("active");
-slides[i].classList.add("active");
-}
+      setTimeout(()=>{
+        document.getElementById("s6").classList.add("hidden");
+        document.getElementById("s7").classList.remove("hidden");
 
-function nextSlide(){
-i++;
-if(i>=slides.length)i=0;
-show();
-}
+        setTimeout(()=>{
+          document.getElementById("finalText").style.opacity = 1;
+        },500);
 
-function prevSlide(){
-i--;
-if(i<0)i=slides.length-1;
-show();
+      },2000);
+
+    },800);
+  }
 }
 
 </script>
