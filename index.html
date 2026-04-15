@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For You</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: #0e0e0e;
+    color: #fff;
+    text-align: center;
+    overflow-x: hidden;
+}
+
+.section {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: 1s;
+}
+
+.section.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    border: none;
+    background: #fff;
+    color: #000;
+    cursor: pointer;
+    border-radius: 20px;
+    font-size: 16px;
+}
+
+img {
+    width: 250px;
+    border-radius: 15px;
+    margin-top: 20px;
+    filter: grayscale(100%);
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- music -->
+<audio id="music" loop>
+<source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<div class="section show">
+    <h2>Hey… I don’t know if you’ll ever know who this is</h2>
+    <button onclick="nextSection()">but click anyway</button>
+</div>
+
+<div class="section">
+    <h2>Some things are better felt than explained.</h2>
+    <button onclick="nextSection()">keep going</button>
+</div>
+
+<div class="section">
+    <p>
+    I just wanted to say that you’ve always been someone really special to me.<br><br>
+    You changed something in my life without even trying…<br>
+    you made life feel lighter, better.<br><br>
+    There’s something about you that’s just rare.<br>
+    Your laugh, your kindness… everything.
+    </p>
+    <button onclick="nextSection()">...</button>
+</div>
+
+<div class="section">
+    <img src="photo.jpg"> alt="him">
+    <p>You probably don’t even realize how much you mean.</p>
+    <button onclick="nextSection()">next</button>
+</div>
+
+<div class="section">
+    <p>
+    I hope you never feel alone.<br>
+    I hope you laugh more.<br>
+    I hope life is kind to you.<br>
+    I hope you live a beautiful life.
+    </p>
+    <button onclick="nextSection()">almost there</button>
+</div>
+
+<div class="section">
+    <h2>Maybe we won’t meet again…</h2>
+</div>
+
+<div class="section">
+    <h2>but you’ll always be remembered.</h2>
+    <p style="margin-top:20px;">from someone who once knew you well.</p>
+</div>
+
+<script>
+let sections = document.querySelectorAll('.section');
+let current = 0;
+
+function nextSection() {
+    document.getElementById("music").play();
+
+    sections[current].classList.remove("show");
+    current++;
+    if (current < sections.length) {
+        sections[current].classList.add("show");
+        window.scrollTo(0, current * window.innerHeight);
+    }
+}
+</script>
+
+</body>
+</html>
