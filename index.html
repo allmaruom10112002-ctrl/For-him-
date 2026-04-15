@@ -8,68 +8,57 @@
 body {
   margin: 0;
   font-family: 'Segoe UI', sans-serif;
-  background: black;
   color: white;
   overflow: hidden;
+  background: radial-gradient(circle at bottom, #020b2d, #000000);
 }
 
-/* شاشة البداية */
-#intro {
+/* 🌌 نجوم حقيقية */
+.stars, .stars2 {
   position: fixed;
-  width: 100%;
-  height: 100vh;
-  background: black;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  z-index: 10;
+  width: 200%;
+  height: 200%;
+  background-repeat: repeat;
+  z-index: -2;
 }
 
-#intro h1 {
-  font-size: 22px;
-  opacity: 0;
-  animation: fadeIn 3s forwards;
-}
-
-@keyframes fadeIn {
-  to {opacity: 1;}
-}
-
-/* نجوم */
 .stars {
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  background: url('https://raw.githubusercontent.com/VincentGarreau/particles.js/master/demo/media/star.png');
-  background-size: 2px;
-  animation: move 120s linear infinite;
-  z-index: -1;
+  background-image: url('https://raw.githubusercontent.com/VincentGarreau/particles.js/master/demo/media/star.png');
+  animation: moveStars 120s linear infinite;
+  opacity: 0.6;
 }
 
-@keyframes move {
-  from {background-position: 0 0;}
-  to {background-position: 10000px 5000px;}
+.stars2 {
+  background-image: url('https://raw.githubusercontent.com/VincentGarreau/particles.js/master/demo/media/star.png');
+  animation: moveStars 200s linear infinite;
+  opacity: 0.3;
 }
 
+@keyframes moveStars {
+  from {transform: translate(0,0);}
+  to {transform: translate(-500px,-1000px);}
+}
+
+/* الصفحات */
 .page {
   display: none;
   height: 100vh;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  padding: 20px;
+  padding: 25px;
   text-align: center;
 }
 
-.active {display: flex;}
+.active {display:flex;}
 
 p {
-  font-size: 24px;
+  font-size: 26px;
   max-width: 900px;
   line-height: 2;
 }
 
+/* زرار */
 button {
   margin-top: 20px;
   padding: 12px 25px;
@@ -80,23 +69,42 @@ button {
   font-size: 16px;
 }
 
-/* سلايد */
+/* SLIDES */
 .slide {
   display: none;
-  font-size: 26px;
+  font-size: 28px;
+  transition: 0.5s ease;
 }
+
 .slide.active {display:block;}
 
 img {
-  width: 250px;
+  width: 260px;
   border-radius: 15px;
-  margin-top: 15px;
+  margin-top: 12px;
+  box-shadow: 0 0 20px rgba(255,255,255,0.1);
 }
 
-/* زرار سرّي */
-.secret {
-  display: none;
-  margin-top: 20px;
+/* intro */
+#intro {
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  background: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+  animation: fadeIntro 3s forwards;
+}
+
+#intro h1 {
+  font-size: 22px;
+}
+
+@keyframes fadeIntro {
+  0% {opacity:1;}
+  100% {opacity:0; visibility:hidden;}
 }
 </style>
 </head>
@@ -104,35 +112,33 @@ img {
 <body>
 
 <div class="stars"></div>
+<div class="stars2"></div>
 
 <!-- INTRO -->
 <div id="intro">
   <h1>This is not just a message…</h1>
 </div>
 
-<!-- AUDIO -->
 <audio id="music" loop>
-  <source src="music.mp3" type="audio/mpeg">
+  <source src="music.mp3">
 </audio>
 
 <!-- PAGE 1 -->
 <div class="page active" id="page1">
-  <p id="text1"></p>
-  <button onclick="nextPage(2); playMusic()">Next</button>
+  <p>I don’t know if you’ll ever know who this is… but I hope you feel this.</p>
+  <button onclick="playMusic(); nextPage(2)">Next</button>
 </div>
 
 <!-- PAGE 2 -->
 <div class="page" id="page2">
   <p>
-I just wanted to say that you’ve always been someone really special to me.
-You changed something in my life without even trying… you made me see things differently, made life feel lighter, better.
-You’re not like anyone else… and I hope you never become like them.
-I’ll keep some moments to myself… but they meant more than you know.
+You’ve always been someone really special to me.
+You changed something in my life without even trying.
   </p>
   <button onclick="nextPage(3)">Next</button>
 </div>
 
-<!-- SLIDES -->
+<!-- PAGE 3 - SLIDES -->
 <div class="page" id="page3">
 
 <h2>Things I love about Abdelrahman 💌</h2>
@@ -143,21 +149,17 @@ Your laugh 🤍
 </div>
 
 <div class="slide">
-Your way of talking
+Your little mole (mark on your hand)
 <img src="photo2.jpg">
 </div>
 
 <div class="slide">
-Your kind heart
+Your scent
 <img src="photo3.jpg">
 </div>
 
 <div class="slide">
-The mark on your hand
-</div>
-
-<div class="slide">
-Your scent
+Your way of talking
 </div>
 
 <div class="slide">
@@ -165,60 +167,51 @@ Your music taste
 </div>
 
 <div>
-<button onclick="prev()">←</button>
-<button onclick="next()">→</button>
+<button onclick="prevSlide()">←</button>
+<button onclick="nextSlide()">→</button>
 </div>
 
 <button onclick="nextPage(4)">Continue</button>
 
 </div>
 
-<!-- EMOTIONAL -->
+<!-- EMOTION -->
 <div class="page" id="page4">
-<p>
-No matter what happens, you’ll always matter to me.
-You were home in a way I can’t explain.
-</p>
+<p>No matter what happens… you were home in a way I can’t explain.</p>
 <button onclick="nextPage(5)">Next</button>
 </div>
 
 <div class="page" id="page5">
-<p>
-I hope life is kind to you…
-and even when it isn’t, I hope you still find happiness.
-</p>
+<p>I hope life is kind to you… always.</p>
 <button onclick="nextPage(6)">Next</button>
 </div>
 
 <div class="page" id="page6">
-<p>
-Maybe we won’t meet again…
-but I’ll always remember you.
-</p>
-
-<button onclick="showSecret()">Don’t click this…</button>
-
-<div class="secret" id="secret">
-  <h2>You were my favorite story.</h2>
+<p>Maybe we won’t meet again… but I’ll always remember you.</p>
+<button onclick="nextPage(7)">Last</button>
 </div>
+
+<div class="page" id="page7">
+<h2>Some people leave a mark on your life…</h2>
+<h3>and you’re one of them.</h3>
 </div>
 
 <script>
 
-/* intro fade */
-setTimeout(() => {
-  document.getElementById("intro").style.display = "none";
-}, 3500);
+/* intro */
+setTimeout(()=>{
+document.getElementById("intro").style.display="none";
+},3000);
 
 /* pages */
 function nextPage(n){
-  document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
-  document.getElementById("page"+n).classList.add("active");
+document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+document.getElementById("page"+n).classList.add("active");
 }
 
 /* music */
 function playMusic(){
-  document.getElementById("music").play();
+document.getElementById("music").play();
 }
 
 /* slides */
@@ -226,16 +219,20 @@ let i=0;
 const slides=document.getElementsByClassName("slide");
 
 function show(){
-  for(let s of slides)s.classList.remove("active");
-  slides[i].classList.add("active");
+for(let s of slides)s.classList.remove("active");
+slides[i].classList.add("active");
 }
 
-function next(){ i++; if(i>=slides.length)i=0; show();}
-function prev(){ i--; if(i<0)i=slides.length-1; show();}
+function nextSlide(){
+i++;
+if(i>=slides.length)i=0;
+show();
+}
 
-/* secret */
-function showSecret(){
-  document.getElementById("secret").style.display="block";
+function prevSlide(){
+i--;
+if(i<0)i=slides.length-1;
+show();
 }
 
 </script>
