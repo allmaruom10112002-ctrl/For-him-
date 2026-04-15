@@ -2,141 +2,144 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>For Abdulrahman 💙</title>
+<title>Birthday Story 💙</title>
 
 <style>
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: radial-gradient(circle, #001b3a, #000814);
-  color: white;
-  text-align: center;
-  overflow: hidden;
-  font-size: 18px;
+body{
+  margin:0;
+  font-family: Arial;
+  background: #0b1020;
+  color:white;
+  text-align:center;
 }
 
-/* stars background */
-.stars {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background: url('https://www.transparenttextures.com/patterns/stardust.png');
-  opacity: 0.4;
+/* pages */
+.page{
+  display:none;
+  padding:60px 20px;
 }
 
-/* shooting stars */
-.star {
-  position: absolute;
-  width: 3px;
-  height: 3px;
-  background: white;
-  border-radius: 50%;
-  animation: move 3s linear infinite;
-  opacity: 0;
+.active{
+  display:block;
 }
 
-@keyframes move {
-  0% {
-    transform: translate(0,0);
-    opacity: 1;
-  }
-  100% {
-    transform: translate(300px,600px);
-    opacity: 0;
-  }
+/* button */
+button{
+  margin-top:20px;
+  padding:12px 25px;
+  border:none;
+  border-radius:20px;
+  background:#4fc3f7;
+  color:black;
+  font-weight:bold;
 }
 
-/* center content */
-.container {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 90%;
-}
-
-h1 {
-  font-size: 28px;
-}
-
-.text {
-  margin-top: 15px;
-  font-size: 20px;
-  line-height: 1.8;
-}
-
-img {
-  width: 200px;
-  border-radius: 15px;
-  margin-top: 10px;
-  box-shadow: 0 0 20px #4fc3f7;
-}
-
-button {
-  margin-top: 20px;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 20px;
-  background: #4fc3f7;
-  color: black;
-  font-weight: bold;
+/* image */
+img{
+  width:200px;
+  border-radius:15px;
+  margin-top:10px;
 }
 </style>
 </head>
 
 <body>
 
-<div class="stars"></div>
+<!-- PAGE 1 -->
+<div class="page active" id="p1">
+<h1>🎉 Happy Birthday ..</h1>
+<p>Hey You Know What! You're the most adorable human i ever met!</p>
+<button onclick="next(2)">Click to Enter Our World</button>
+</div>
 
-<!-- shooting stars -->
-<div class="star" style="top:10%; left:20%;"></div>
-<div class="star" style="top:30%; left:70%; animation-delay:1s;"></div>
-<div class="star" style="top:60%; left:40%; animation-delay:2s;"></div>
+<!-- PAGE 2 -->
+<div class="page" id="p2">
+<h1>Happy Birthday Ganty 💙</h1>
+<p id="t2"></p>
+<button onclick="next(3)">Enter Our Storylane</button>
+</div>
 
-<div class="container">
-
-<h1>Happy Birthday Abdulrahman 🎉</h1>
+<!-- PAGE 3 -->
+<div class="page" id="p3">
+<h1>Our Beautiful Moments Together 🌸</h1>
 
 <img src="photo.jpg">
 
-<div class="text" id="textBox">
-Hey… I don’t know if you’ll ever know who this is, but I hope you feel this.
+<p id="t3"></p>
+
+<button onclick="next(4)">Next</button>
 </div>
 
-<button onclick="nextText()">Next ➜</button>
-
+<!-- PAGE 4 -->
+<div class="page" id="p4">
+<h1>Thank You for the Memories 💙</h1>
+<p id="t4"></p>
 </div>
 
 <script>
-const messages = [
-`Hey… I don’t know if you’ll ever know who this is, but I hope you feel this.`,
 
-`I just wanted to say that you’ve always been someone really special to me.
-You changed something in my life without even trying… you made life feel a little lighter.`,
-
-`There’s something about you that’s just… rare.
-Your laugh, the way you talk, your kindness… even the smallest things about you stay in my mind.`,
-
-`No matter what happens, you’ll always be someone important to me.
-You were more than just someone in my life… you were home in a way.`,
-
-`I really hope life is kind to you.
-I hope you succeed, travel, laugh, and live beautifully.`,
-
-`Maybe we won’t meet again…
-but I’ll always remember you.
-Some people just leave a mark on your life… and you’re one of them ❤️`
+const text2 = [
+"You're such a kind and wonderful person, and I feel lucky to share such a good bond with you.",
+"Thank you for everything you've done for me.",
+"Wishing you success, happiness, and everything your heart desires.",
+"May God keep you safe for me, my love."
 ];
 
-let i = 0;
+const text3 = [
+"Her Smile Says It All 💙",
+"You're truly one of the sweetest girls I know.",
+"I feel lucky to have a sis like you."
+];
 
-function nextText(){
-  document.getElementById("textBox").innerText = messages[i];
-  i++;
-  if(i >= messages.length){
-    i = 0;
+const text4 = [
+"Everything is beautiful with you, and everything passes smoothly when we're together.",
+"May you always remain my sister, my support, and my strength my love.",
+"Until We Meet Again 💙"
+];
+
+let i2=0, i3=0, i4=0;
+
+function next(page){
+
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('p'+page).classList.add('active');
+
+  if(page==2){
+    type2();
+  }
+  if(page==3){
+    type3();
+  }
+  if(page==4){
+    type4();
   }
 }
+
+/* typing effect */
+function type2(){
+  if(i2 < text2.length){
+    document.getElementById("t2").innerHTML += text2[i2] + "<br><br>";
+    i2++;
+    setTimeout(type2, 800);
+  }
+}
+
+function type3(){
+  if(i3 < text3.length){
+    document.getElementById("t3").innerHTML += text3[i3] + "<br><br>";
+    i3++;
+    setTimeout(type3, 800);
+  }
+}
+
+function type4(){
+  if(i4 < text4.length){
+    document.getElementById("t4").innerHTML += text4[i4] + "<br><br>";
+    i4++;
+    setTimeout(type4, 800);
+  }
+}
+
 </script>
 
 </body>
