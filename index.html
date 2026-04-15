@@ -2,144 +2,139 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Birthday Story 💙</title>
+<title>For You ✨</title>
 
 <style>
-body{
-  margin:0;
-  font-family: Arial;
-  background: #0b1020;
-  color:white;
-  text-align:center;
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: black;
+  color: white;
+  overflow: hidden;
 }
 
-/* pages */
-.page{
-  display:none;
-  padding:60px 20px;
+/* النجوم */
+.stars {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  background: url('https://www.transparenttextures.com/patterns/stardust.png');
+  animation: moveStars 60s linear infinite;
+  z-index: -1;
 }
 
-.active{
-  display:block;
+@keyframes moveStars {
+  from {background-position: 0 0;}
+  to {background-position: 10000px 5000px;}
 }
 
-/* button */
-button{
-  margin-top:20px;
-  padding:12px 25px;
-  border:none;
-  border-radius:20px;
-  background:#4fc3f7;
-  color:black;
-  font-weight:bold;
+.page {
+  display: none;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 30px;
+  text-align: center;
 }
 
-/* image */
-img{
-  width:200px;
-  border-radius:15px;
-  margin-top:10px;
+.active {
+  display: flex;
+}
+
+button {
+  margin-top: 20px;
+  padding: 12px 25px;
+  border: none;
+  background: #ff4d6d;
+  color: white;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+p {
+  max-width: 700px;
+  line-height: 1.8;
 }
 </style>
+
 </head>
 
 <body>
 
-<!-- PAGE 1 -->
-<div class="page active" id="p1">
-<h1>🎉 Happy Birthday ..</h1>
-<p>Hey You Know What! You're the most adorable human i ever met!</p>
-<button onclick="next(2)">Click to Enter Our World</button>
+<div class="stars"></div>
+
+<!-- ميوزك -->
+<audio autoplay loop>
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<!-- الصفحة 1 -->
+<div class="page active" id="page1">
+  <h2>Hey…</h2>
+  <p>I don’t know if you’ll ever know who this is, but I hope you feel this.</p>
+  <button onclick="nextPage(2)">Continue</button>
 </div>
 
-<!-- PAGE 2 -->
-<div class="page" id="p2">
-<h1>Happy Birthday Ganty 💙</h1>
-<p id="t2"></p>
-<button onclick="next(3)">Enter Our Storylane</button>
+<!-- الصفحة 2 -->
+<div class="page" id="page2">
+  <p>
+I just wanted to say that you’ve always been someone really special to me.
+You changed something in my life without even trying… you made me see things differently, made life feel a little lighter, a little better.
+There’s something about you that’s just… rare.
+Your laugh, the way you talk, your kindness… even the smallest things about you stay in my mind.
+You’re not like everyone else, and I hope you never become like them.
+I won’t talk about the moments we had… I think I’ll keep those to myself. But they meant more than you know.
+  </p>
+  <button onclick="nextPage(3)">Next</button>
 </div>
 
-<!-- PAGE 3 -->
-<div class="page" id="p3">
-<h1>Our Beautiful Moments Together 🌸</h1>
-
-<img src="photo.jpg">
-
-<p id="t3"></p>
-
-<button onclick="next(4)">Next</button>
+<!-- الصفحة 3 -->
+<div class="page" id="page3">
+  <p>
+No matter what happens, you’ll always be someone important to me.
+You were good to me, and I’ll never forget that.
+You were more than just someone in my life… you felt like home in a way.
+  </p>
+  <button onclick="nextPage(4)">Next</button>
 </div>
 
-<!-- PAGE 4 -->
-<div class="page" id="p4">
-<h1>Thank You for the Memories 💙</h1>
-<p id="t4"></p>
+<!-- الصفحة 4 -->
+<div class="page" id="page4">
+  <p>
+I really hope life is kind to you.
+And even if it isn’t sometimes… I hope you still find your way to happiness.
+I hope you never feel alone.
+And if you ever do, I hope it doesn’t stay for long.
+I hope your future is everything you dream of…
+that you succeed, travel the world, make money, laugh a lot… and just live a beautiful life.
+  </p>
+  <button onclick="nextPage(5)">Next</button>
+</div>
+
+<!-- الصفحة 5 -->
+<div class="page" id="page5">
+  <p>
+Maybe we won’t meet again…
+but I’ll always remember you, and every little thing that once meant everything.
+I just hope life isn’t too hard on you.
+And that somehow… you stay happy.
+  </p>
+  <button onclick="nextPage(6)">Last</button>
+</div>
+
+<!-- النهاية -->
+<div class="page" id="page6">
+  <h2>Some people just leave a mark on your life…</h2>
+  <h3>and you’re one of them.</h3>
 </div>
 
 <script>
-
-const text2 = [
-"You're such a kind and wonderful person, and I feel lucky to share such a good bond with you.",
-"Thank you for everything you've done for me.",
-"Wishing you success, happiness, and everything your heart desires.",
-"May God keep you safe for me, my love."
-];
-
-const text3 = [
-"Her Smile Says It All 💙",
-"You're truly one of the sweetest girls I know.",
-"I feel lucky to have a sis like you."
-];
-
-const text4 = [
-"Everything is beautiful with you, and everything passes smoothly when we're together.",
-"May you always remain my sister, my support, and my strength my love.",
-"Until We Meet Again 💙"
-];
-
-let i2=0, i3=0, i4=0;
-
-function next(page){
-
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.getElementById('p'+page).classList.add('active');
-
-  if(page==2){
-    type2();
-  }
-  if(page==3){
-    type3();
-  }
-  if(page==4){
-    type4();
-  }
+function nextPage(page) {
+  document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
+  document.getElementById("page" + page).classList.add("active");
 }
-
-/* typing effect */
-function type2(){
-  if(i2 < text2.length){
-    document.getElementById("t2").innerHTML += text2[i2] + "<br><br>";
-    i2++;
-    setTimeout(type2, 800);
-  }
-}
-
-function type3(){
-  if(i3 < text3.length){
-    document.getElementById("t3").innerHTML += text3[i3] + "<br><br>";
-    i3++;
-    setTimeout(type3, 800);
-  }
-}
-
-function type4(){
-  if(i4 < text4.length){
-    document.getElementById("t4").innerHTML += text4[i4] + "<br><br>";
-    i4++;
-    setTimeout(type4, 800);
-  }
-}
-
 </script>
 
 </body>
