@@ -2,30 +2,52 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>For You ✨</title>
+<title>For You</title>
 
 <style>
 body {
   margin: 0;
   font-family: 'Segoe UI', sans-serif;
-  background: radial-gradient(circle at bottom, #020111 0%, #000000 80%);
+  background: black;
   color: white;
   overflow: hidden;
 }
 
+/* شاشة البداية */
+#intro {
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  background: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  z-index: 10;
+}
+
+#intro h1 {
+  font-size: 22px;
+  opacity: 0;
+  animation: fadeIn 3s forwards;
+}
+
+@keyframes fadeIn {
+  to {opacity: 1;}
+}
+
 /* نجوم */
 .stars {
+  position: fixed;
   width: 100%;
   height: 100%;
-  position: fixed;
   background: url('https://raw.githubusercontent.com/VincentGarreau/particles.js/master/demo/media/star.png');
-  background-size: 3px;
-  animation: moveStars 100s linear infinite;
-  opacity: 0.7;
+  background-size: 2px;
+  animation: move 120s linear infinite;
   z-index: -1;
 }
 
-@keyframes moveStars {
+@keyframes move {
   from {background-position: 0 0;}
   to {background-position: 10000px 5000px;}
 }
@@ -40,8 +62,12 @@ body {
   text-align: center;
 }
 
-.active {
-  display: flex;
+.active {display: flex;}
+
+p {
+  font-size: 24px;
+  max-width: 900px;
+  line-height: 2;
 }
 
 button {
@@ -51,182 +77,167 @@ button {
   background: #ff4d6d;
   color: white;
   border-radius: 20px;
-  cursor: pointer;
   font-size: 16px;
 }
 
-p {
-  max-width: 800px;
-  line-height: 1.9;
-  font-size: 20px;
-}
-
-/* سلايدات */
+/* سلايد */
 .slide {
   display: none;
-  font-size: 24px;
+  font-size: 26px;
 }
-
-.slide.active {
-  display: block;
-}
+.slide.active {display:block;}
 
 img {
-  width: 220px;
+  width: 250px;
   border-radius: 15px;
   margin-top: 15px;
 }
-</style>
 
+/* زرار سرّي */
+.secret {
+  display: none;
+  margin-top: 20px;
+}
+</style>
 </head>
 
 <body>
 
 <div class="stars"></div>
 
+<!-- INTRO -->
+<div id="intro">
+  <h1>This is not just a message…</h1>
+</div>
+
+<!-- AUDIO -->
 <audio id="music" loop>
   <source src="music.mp3" type="audio/mpeg">
 </audio>
 
-<!-- الصفحة 1 -->
+<!-- PAGE 1 -->
 <div class="page active" id="page1">
-  <h1>Happy Birthday to the most amazing person ever 🎂</h1>
-  <button onclick="playMusic(); nextPage(2)">Continue</button>
+  <p id="text1"></p>
+  <button onclick="nextPage(2); playMusic()">Next</button>
 </div>
 
-<!-- الصفحة 2 -->
+<!-- PAGE 2 -->
 <div class="page" id="page2">
   <p>
-I don’t know if you’ll ever know who this is, but I hope you feel this.
+I just wanted to say that you’ve always been someone really special to me.
+You changed something in my life without even trying… you made me see things differently, made life feel lighter, better.
+You’re not like anyone else… and I hope you never become like them.
+I’ll keep some moments to myself… but they meant more than you know.
   </p>
   <button onclick="nextPage(3)">Next</button>
 </div>
 
-<!-- الصفحة 3 -->
+<!-- SLIDES -->
 <div class="page" id="page3">
-  <p>
-I just wanted to say that you’ve always been someone really special to me.
-You changed something in my life without even trying… you made me see things differently, made life feel a little lighter, a little better.
 
-There’s something about you I can’t really explain… but it stays with me.
+<h2>Things I love about Abdelrahman 💌</h2>
 
-You’re not like everyone else, and I hope you never become like them.
-I won’t talk about the moments we had… I think I’ll keep those to myself. But they meant more than you know.
-  </p>
-  <button onclick="nextPage(4)">Next</button>
+<div class="slide active">
+Your laugh 🤍
+<img src="photo1.jpg">
 </div>
 
-<!-- السلايدات -->
-<div class="page" id="page4">
+<div class="slide">
+Your way of talking
+<img src="photo2.jpg">
+</div>
 
-<h2>Things I love about you, Abdelrahman 💌</h2>
+<div class="slide">
+Your kind heart
+<img src="photo3.jpg">
+</div>
 
-<div id="slides">
-  <div class="slide active">
-    Your laugh 🤍
-    <img src="photo1.jpg">
-  </div>
+<div class="slide">
+The mark on your hand
+</div>
 
-  <div class="slide">
-    The way you talk
-    <img src="photo2.jpg">
-  </div>
+<div class="slide">
+Your scent
+</div>
 
-  <div class="slide">
-    Your kind heart
-    <img src="photo3.jpg">
-  </div>
-
-  <div class="slide">
-    The little mole on your hand
-  </div>
-
-  <div class="slide">
-    Your scent
-  </div>
-
-  <div class="slide">
-    Your music taste
-  </div>
+<div class="slide">
+Your music taste
 </div>
 
 <div>
-  <button onclick="prevSlide()">←</button>
-  <button onclick="nextSlideItem()">→</button>
+<button onclick="prev()">←</button>
+<button onclick="next()">→</button>
 </div>
 
+<button onclick="nextPage(4)">Continue</button>
+
+</div>
+
+<!-- EMOTIONAL -->
+<div class="page" id="page4">
+<p>
+No matter what happens, you’ll always matter to me.
+You were home in a way I can’t explain.
+</p>
 <button onclick="nextPage(5)">Next</button>
-
 </div>
 
-<!-- باقي الكلام -->
 <div class="page" id="page5">
-  <p>
-No matter what happens, you’ll always be someone important to me.
-You were good to me, and I’ll never forget that.
-You were more than just someone in my life… you felt like home in a way.
-  </p>
-  <button onclick="nextPage(6)">Next</button>
+<p>
+I hope life is kind to you…
+and even when it isn’t, I hope you still find happiness.
+</p>
+<button onclick="nextPage(6)">Next</button>
 </div>
 
 <div class="page" id="page6">
-  <p>
-I really hope life is kind to you.
-And even if it isn’t sometimes… I hope you still find your way to happiness.
-I hope you never feel alone.
-And if you ever do, I hope it doesn’t stay for long.
-I hope your future is everything you dream of…
-that you succeed, travel the world, make money, laugh a lot… and just live a beautiful life.
-  </p>
-  <button onclick="nextPage(7)">Next</button>
-</div>
-
-<div class="page" id="page7">
-  <p>
+<p>
 Maybe we won’t meet again…
-but I’ll always remember you, and every little thing that once meant everything.
-I just hope life isn’t too hard on you.
-And that somehow… you stay happy.
-  </p>
-  <button onclick="nextPage(8)">Last</button>
-</div>
+but I’ll always remember you.
+</p>
 
-<div class="page" id="page8">
-  <h2>Some people just leave a mark on your life…</h2>
-  <h3>and you’re one of them.</h3>
+<button onclick="showSecret()">Don’t click this…</button>
+
+<div class="secret" id="secret">
+  <h2>You were my favorite story.</h2>
+</div>
 </div>
 
 <script>
-function nextPage(page) {
-  document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
-  document.getElementById("page" + page).classList.add("active");
+
+/* intro fade */
+setTimeout(() => {
+  document.getElementById("intro").style.display = "none";
+}, 3500);
+
+/* pages */
+function nextPage(n){
+  document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+  document.getElementById("page"+n).classList.add("active");
 }
 
-function playMusic() {
+/* music */
+function playMusic(){
   document.getElementById("music").play();
 }
 
-let currentSlide = 0;
-const slides = document.getElementsByClassName("slide");
+/* slides */
+let i=0;
+const slides=document.getElementsByClassName("slide");
 
-function showSlide(index) {
-  for (let i = 0; i < slides.length; i++) {
-    slides[i].classList.remove("active");
-  }
-  slides[index].classList.add("active");
+function show(){
+  for(let s of slides)s.classList.remove("active");
+  slides[i].classList.add("active");
 }
 
-function nextSlideItem() {
-  currentSlide++;
-  if (currentSlide >= slides.length) currentSlide = 0;
-  showSlide(currentSlide);
+function next(){ i++; if(i>=slides.length)i=0; show();}
+function prev(){ i--; if(i<0)i=slides.length-1; show();}
+
+/* secret */
+function showSecret(){
+  document.getElementById("secret").style.display="block";
 }
 
-function prevSlide() {
-  currentSlide--;
-  if (currentSlide < 0) currentSlide = slides.length - 1;
-  showSlide(currentSlide);
-}
 </script>
 
 </body>
