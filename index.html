@@ -22,40 +22,45 @@ body{
   color:white;
 }
 
-/* ===== STARS FIXED ===== */
+/* ===== REAL MOVING STARS ===== */
 .stars{
   position:absolute;
   width:100%;
   height:100%;
-  background: transparent;
+  overflow:hidden;
   z-index:0;
 }
 
-.stars::before{
-  content:"";
+.star{
   position:absolute;
   width:2px;
   height:2px;
   background:white;
-  box-shadow:
-  10vw 10vh white,
-  20vw 30vh white,
-  30vw 80vh white,
-  50vw 20vh white,
-  70vw 60vh white,
-  80vw 40vh white,
-  90vw 70vh white,
-  60vw 90vh white,
-  40vw 50vh white,
-  25vw 60vh white,
-  15vw 75vh white,
-  85vw 15vh white;
-  animation: twinkle 3s infinite alternate;
+  border-radius:50%;
+  opacity:0.8;
+  animation: twinkle 2s infinite alternate;
 }
 
 @keyframes twinkle{
-  from{opacity:0.3;}
-  to{opacity:1;}
+  from{opacity:0.2; transform:scale(0.8);}
+  to{opacity:1; transform:scale(1.2);}
+}
+
+/* shooting stars */
+.shooting-star{
+  position:absolute;
+  width:120px;
+  height:2px;
+  background:linear-gradient(90deg, white, transparent);
+  opacity:0;
+  transform:rotate(25deg);
+  animation: shoot 6s linear infinite;
+}
+
+@keyframes shoot{
+  0%{transform:translateX(-200px) translateY(0) rotate(25deg); opacity:0;}
+  10%{opacity:1;}
+  100%{transform:translateX(120vw) translateY(60vh) rotate(25deg); opacity:0;}
 }
 
 /* aurora */
@@ -122,10 +127,15 @@ img{
 
 <body>
 
-<div class="stars"></div>
+<div class="stars" id="stars"></div>
 <div class="aurora"></div>
 
 <div class="small">for you, Abdelrahman.</div>
+
+<!-- SHOOTING STARS -->
+<div class="shooting-star" style="top:20%; animation-delay:0s;"></div>
+<div class="shooting-star" style="top:50%; animation-delay:2s;"></div>
+<div class="shooting-star" style="top:70%; animation-delay:4s;"></div>
 
 <!-- 1 -->
 <div class="slide active">
@@ -149,6 +159,8 @@ I won’t talk about the moments we had… I think I’ll keep those to myself. 
 
 <!-- 4 -->
 <div class="slide">
+<p>Hajet I love about you</p>
+
 <p>"Your smile, the mark on your hand , the way you talk, your kind heart, your smell, and your taste in music."</p>
 
 <img src="photo1.jpg" />
@@ -182,6 +194,19 @@ and you’re one of them❤️"</p>
 </div>
 
 <script>
+// generate real stars
+const starsContainer = document.getElementById("stars");
+
+for(let i=0;i<80;i++){
+  const s = document.createElement("div");
+  s.className = "star";
+  s.style.left = Math.random()*100 + "vw";
+  s.style.top = Math.random()*100 + "vh";
+  s.style.animationDuration = (1 + Math.random()*3) + "s";
+  starsContainer.appendChild(s);
+}
+
+// slide system
 const slides = document.querySelectorAll(".slide");
 let index = 0;
 
