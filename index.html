@@ -38,7 +38,7 @@ body{
   background:white;
   border-radius:50%;
   opacity:0.8;
-  animation: twinkle 3s infinite alternate, drift 10s linear infinite;
+  animation: twinkle 3s infinite alternate, drift 8s linear infinite;
 }
 
 @keyframes twinkle{
@@ -54,23 +54,33 @@ body{
 /* ===== REALISTIC METEORS ===== */
 .shooting-star{
   position:absolute;
-  width:120px;
-  height:2px;
-  background:linear-gradient(90deg, rgba(255,255,255,0.9), transparent);
+  width:3px;
+  height:3px;
+  background:white;
+  border-radius:50%;
+  box-shadow:0 0 10px white, 0 0 20px rgba(255,255,255,0.6);
   opacity:0;
-  border-radius:50px;
-  filter: blur(0.5px);
-  animation: shoot 6s linear infinite;
+  animation: meteor 5s linear infinite;
 }
 
-@keyframes shoot{
+.shooting-star::after{
+  content:"";
+  position:absolute;
+  width:120px;
+  height:2px;
+  background:linear-gradient(90deg, white, transparent);
+  transform:translateX(-120px) rotate(25deg);
+  opacity:0.6;
+}
+
+@keyframes meteor{
   0%{
-    transform:translateX(120vw) translateY(0) rotate(25deg);
+    transform:translate(120vw, -20vh);
     opacity:0;
   }
-  5%{opacity:1;}
+  10%{opacity:1;}
   100%{
-    transform:translateX(-200px) translateY(30vh) rotate(25deg);
+    transform:translate(-20vw, 120vh);
     opacity:0;
   }
 }
@@ -145,8 +155,8 @@ img{
 
 <!-- shooting stars -->
 <div class="shooting-star" style="top:20%; animation-delay:0s;"></div>
-<div class="shooting-star" style="top:50%; animation-delay:3s;"></div>
-<div class="shooting-star" style="top:70%; animation-delay:5s;"></div>
+<div class="shooting-star" style="top:50%; animation-delay:2s;"></div>
+<div class="shooting-star" style="top:70%; animation-delay:4s;"></div>
 
 <!-- 1 -->
 <div class="slide active">
@@ -214,15 +224,15 @@ and you’re one of them❤️
 </div>
 
 <script>
-// stars generator
+// stars
 const starsContainer = document.getElementById("stars");
 
-for(let i=0;i<120;i++){
+for(let i=0;i<140;i++){
   const s = document.createElement("div");
   s.className = "star";
   s.style.left = Math.random()*100 + "vw";
   s.style.top = Math.random()*100 + "vh";
-  s.style.animationDuration = (2 + Math.random()*3) + "s, " + (8 + Math.random()*5) + "s";
+  s.style.animationDuration = (1 + Math.random()*2) + "s, " + (6 + Math.random()*6) + "s";
   starsContainer.appendChild(s);
 }
 
