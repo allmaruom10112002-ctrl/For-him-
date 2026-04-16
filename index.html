@@ -38,7 +38,7 @@ body{
   background:white;
   border-radius:50%;
   opacity:0.8;
-  animation: twinkle 3s infinite alternate, drift 8s linear infinite;
+  animation: twinkle 3s infinite alternate, drift 10s linear infinite;
 }
 
 @keyframes twinkle{
@@ -51,36 +51,40 @@ body{
   100%{transform:translateY(-20px);}
 }
 
-/* ===== REALISTIC METEORS ===== */
+/* ===== REAL METEORS (FIXED REAL DIRECTION) ===== */
 .shooting-star{
   position:absolute;
-  width:3px;
-  height:3px;
-  background:white;
-  border-radius:50%;
-  box-shadow:0 0 10px white, 0 0 20px rgba(255,255,255,0.6);
+  width:140px;
+  height:2px;
+  background:linear-gradient(90deg, rgba(255,255,255,1), transparent);
   opacity:0;
-  animation: meteor 5s linear infinite;
+  transform:rotate(35deg);
+  filter: blur(0.3px);
+  animation: meteor 3.5s linear infinite;
 }
 
-.shooting-star::after{
+/* glowing head */
+.shooting-star::before{
   content:"";
   position:absolute;
-  width:120px;
-  height:2px;
-  background:linear-gradient(90deg, white, transparent);
-  transform:translateX(-120px) rotate(25deg);
-  opacity:0.6;
+  left:0;
+  top:-1px;
+  width:4px;
+  height:4px;
+  background:white;
+  border-radius:50%;
+  box-shadow:0 0 10px white;
 }
 
+/* REAL SKY MOVEMENT: diagonal sweep */
 @keyframes meteor{
   0%{
-    transform:translate(120vw, -20vh);
+    transform:translate(-20vw, -10vh) rotate(35deg);
     opacity:0;
   }
   10%{opacity:1;}
   100%{
-    transform:translate(-20vw, 120vh);
+    transform:translate(120vw, 80vh) rotate(35deg);
     opacity:0;
   }
 }
@@ -154,9 +158,9 @@ img{
 <div class="small">for you, Abdelrahman</div>
 
 <!-- shooting stars -->
-<div class="shooting-star" style="top:20%; animation-delay:0s;"></div>
-<div class="shooting-star" style="top:50%; animation-delay:2s;"></div>
-<div class="shooting-star" style="top:70%; animation-delay:4s;"></div>
+<div class="shooting-star" style="top:15%; animation-delay:0s;"></div>
+<div class="shooting-star" style="top:45%; animation-delay:1.5s;"></div>
+<div class="shooting-star" style="top:70%; animation-delay:3s;"></div>
 
 <!-- 1 -->
 <div class="slide active">
