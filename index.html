@@ -51,40 +51,38 @@ body{
   100%{transform:translateY(-20px);}
 }
 
-/* ===== REAL METEORS (FIXED REAL DIRECTION) ===== */
+/* ===== REALISTIC METEORS (FIXED PROPERLY) ===== */
 .shooting-star{
   position:absolute;
-  width:140px;
+  width:2px;
   height:2px;
-  background:linear-gradient(90deg, rgba(255,255,255,1), transparent);
-  opacity:0;
-  transform:rotate(35deg);
-  filter: blur(0.3px);
-  animation: meteor 3.5s linear infinite;
-}
-
-/* glowing head */
-.shooting-star::before{
-  content:"";
-  position:absolute;
-  left:0;
-  top:-1px;
-  width:4px;
-  height:4px;
   background:white;
   border-radius:50%;
-  box-shadow:0 0 10px white;
+  box-shadow:0 0 8px white, 0 0 16px rgba(255,255,255,0.6);
+  opacity:0;
+  animation: meteorMove 4s linear infinite;
 }
 
-/* REAL SKY MOVEMENT: diagonal sweep */
-@keyframes meteor{
+/* natural tail */
+.shooting-star::after{
+  content:"";
+  position:absolute;
+  top:0;
+  right:0;
+  width:90px;
+  height:1px;
+  background:linear-gradient(to left, white, transparent);
+  opacity:0.6;
+}
+
+@keyframes meteorMove{
   0%{
-    transform:translate(-20vw, -10vh) rotate(35deg);
+    transform:translate(-30vw, -20vh) rotate(35deg);
     opacity:0;
   }
   10%{opacity:1;}
   100%{
-    transform:translate(120vw, 80vh) rotate(35deg);
+    transform:translate(130vw, 90vh) rotate(35deg);
     opacity:0;
   }
 }
@@ -106,6 +104,7 @@ body{
   50%{transform:translateY(-20px);}
 }
 
+/* ===== SLIDES ===== */
 .slide{
   position:absolute;
   width:100%;
@@ -158,9 +157,9 @@ img{
 <div class="small">for you, Abdelrahman</div>
 
 <!-- shooting stars -->
-<div class="shooting-star" style="top:15%; animation-delay:0s;"></div>
-<div class="shooting-star" style="top:45%; animation-delay:1.5s;"></div>
-<div class="shooting-star" style="top:70%; animation-delay:3s;"></div>
+<div class="shooting-star" style="top:15%; left:0; animation-delay:0s;"></div>
+<div class="shooting-star" style="top:45%; left:0; animation-delay:1.5s;"></div>
+<div class="shooting-star" style="top:70%; left:0; animation-delay:3s;"></div>
 
 <!-- 1 -->
 <div class="slide active">
