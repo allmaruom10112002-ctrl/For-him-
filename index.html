@@ -22,7 +22,27 @@ body{
   color:white;
 }
 
-/* ===== MOVING STARS ===== */
+/* ===== START SCREEN ===== */
+#startScreen{
+  position:absolute;
+  width:100%;
+  height:100%;
+  background:#050816;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  z-index:10;
+  cursor:pointer;
+}
+
+#startScreen h1{
+  font-size:22px;
+  letter-spacing:2px;
+  opacity:0.8;
+}
+
+/* ===== STARS ===== */
 .stars{
   position:absolute;
   width:100%;
@@ -38,7 +58,7 @@ body{
   background:white;
   border-radius:50%;
   opacity:0.8;
-  animation: twinkle 3s infinite alternate, drift 12s linear infinite;
+  animation: twinkle 3s infinite alternate, drift 10s linear infinite;
 }
 
 @keyframes twinkle{
@@ -51,7 +71,7 @@ body{
   100%{transform:translateY(-20px);}
 }
 
-/* ===== SHOOTING STARS FIXED DIRECTION ===== */
+/* SHOOTING STARS */
 .shooting-star{
   position:absolute;
   width:170px;
@@ -63,18 +83,12 @@ body{
 }
 
 @keyframes shoot{
-  0%{
-    transform:translateX(120vw) translateY(0) rotate(25deg);
-    opacity:0;
-  }
+  0%{transform:translateX(120vw) translateY(0) rotate(25deg); opacity:0;}
   5%{opacity:1;}
-  100%{
-    transform:translateX(-200px) translateY(40vh) rotate(25deg);
-    opacity:0;
-  }
+  100%{transform:translateX(-200px) translateY(40vh) rotate(25deg); opacity:0;}
 }
 
-/* aurora */
+/* AURORA */
 .aurora{
   position:absolute;
   width:100%;
@@ -91,6 +105,7 @@ body{
   50%{transform:translateY(-20px);}
 }
 
+/* SLIDES */
 .slide{
   position:absolute;
   width:100%;
@@ -102,7 +117,7 @@ body{
   text-align:center;
   padding:20px;
   opacity:0;
-  transition:1s ease;
+  transition:1.2s ease;
   z-index:2;
 }
 
@@ -122,120 +137,14 @@ img{
   margin-top:15px;
   box-shadow:0 0 20px rgba(255,255,255,0.2);
 }
-
-.small{
-  font-size:14px;
-  opacity:0.7;
-  position:absolute;
-  top:15px;
-  width:100%;
-  text-align:center;
-  z-index:3;
-}
 </style>
 </head>
 
 <body>
 
-<div class="stars" id="stars"></div>
-<div class="aurora"></div>
-
-<div class="small">for you, Abdelrahman</div>
-
-<!-- shooting stars -->
-<div class="shooting-star" style="top:20%; animation-delay:0s;"></div>
-<div class="shooting-star" style="top:50%; animation-delay:3s;"></div>
-<div class="shooting-star" style="top:70%; animation-delay:5s;"></div>
-
-<!-- 1 -->
-<div class="slide active">
-  <p>Happy Birthday to the most amazing person ever</p>
-  <img src="photo3.jpg" />
+<!-- START -->
+<div id="startScreen">
+  <h1>Click to enter your world</h1>
 </div>
 
-<!-- 2 -->
-<div class="slide">
-<p>I don’t know if you’ll ever know who this is but I hope you feel this</p>
-</div>
-
-<!-- 3 -->
-<div class="slide">
-<p>
-I just wanted to say that you’ve always been someone really special to me
-You changed something in my life without even trying… you made me see things differently made life feel a little lighter a little better
-(There’s something about you… different)
-You’re not like everyone else and I hope you never become like them
-I won’t talk about the moments we had… I think I’ll keep those to myself But they meant more than you know
-</p>
-</div>
-
-<!-- 4 -->
-<div class="slide">
-<p>💙 Things I love about you</p>
-
-<p>
-Your smile the mark on your hand the way you talk your kind heart your smell your taste in music and your different personality
-</p>
-
-<img src="photo1.jpg" />
-</div>
-
-<!-- 5 -->
-<div class="slide">
-<p>
-No matter what happens you’ll always be someone important to me
-You were good to me and I’ll never forget that
-You were more than just someone in my life… you were home in a way
-</p>
-</div>
-
-<!-- 6 -->
-<div class="slide">
-<p>
-I really hope life is kind to you
-And even if it isn’t sometimes I hope you still find your way to happiness
-I hope you never feel alone
-And if you ever do I hope it doesn’t stay for long
-I hope your future is everything you dream of
-that you succeed travel the world make money laugh a lot… and just live a beautiful life
-</p>
-</div>
-
-<!-- 7 -->
-<div class="slide">
-<p>
-Maybe we won’t meet again
-but I’ll always remember you and every little thing that once meant everything
-I just hope life isn’t too hard on you
-And that somehow… you stay happy
-Some people just leave a mark on your life
-and you’re one of them❤️
-</p>
-</div>
-
-<script>
-// stars movement
-const starsContainer = document.getElementById("stars");
-
-for(let i=0;i<120;i++){
-  const s = document.createElement("div");
-  s.className = "star";
-  s.style.left = Math.random()*100 + "vw";
-  s.style.top = Math.random()*100 + "vh";
-  s.style.animationDuration = (2 + Math.random()*3) + "s, " + (8 + Math.random()*5) + "s";
-  starsContainer.appendChild(s);
-}
-
-// slides
-const slides = document.querySelectorAll(".slide");
-let index = 0;
-
-document.body.addEventListener("click", () => {
-  slides[index].classList.remove("active");
-  index = (index + 1) % slides.length;
-  slides[index].classList.add("active");
-});
-</script>
-
-</body>
-</html>
+<div class="stars
