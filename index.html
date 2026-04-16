@@ -1,240 +1,192 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>For You</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Birthday</title>
 
 <style>
-body {
-    margin: 0;
-    font-family: 'Segoe UI', sans-serif;
-    color: #eaefff;
-    text-align: center;
-    overflow: hidden;
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap');
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Inter, sans-serif;
 }
 
-/* 🌌 background */
-.sky {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(to bottom, #020111, #050a2a, #0a1a4f);
-    z-index: -2;
+body{
+  height:100vh;
+  overflow:hidden;
+  background: radial-gradient(circle at top, #0b1b3a, #050816 70%);
+  color:white;
 }
 
-.stars {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    background: url('https://i.imgur.com/YKY28eT.png') repeat;
-    animation: moveStars 200s linear infinite;
-    z-index: -1;
-    opacity: 0.8;
+/* stars */
+.stars, .stars:after {
+  content:"";
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background: transparent;
+  box-shadow:
+  20px 30px white, 120px 80px white, 200px 150px white,
+  300px 200px white, 400px 50px white, 600px 300px white,
+  800px 100px white, 900px 400px white;
+  animation: moveStars 60s linear infinite;
+  opacity:0.5;
 }
 
-@keyframes moveStars {
-    from {background-position: 0 0;}
-    to {background-position: 10000px 5000px;}
+@keyframes moveStars{
+  from{transform:translateY(0);}
+  to{transform:translateY(-200px);}
 }
 
-/* sections */
-.section {
-    height: 100vh;
-    display: none;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    padding: 25px;
+/* aurora */
+.aurora{
+  position:absolute;
+  width:100%;
+  height:100%;
+  background: radial-gradient(circle at 30% 40%, rgba(0,140,255,0.25), transparent 50%),
+              radial-gradient(circle at 70% 60%, rgba(120,0,255,0.2), transparent 50%);
+  filter: blur(40px);
+  animation: float 8s ease-in-out infinite;
 }
 
-.section.show {
-    display: flex;
+@keyframes float{
+  0%,100%{transform:translateY(0);}
+  50%{transform:translateY(-20px);}
 }
 
-/* text */
-h1 {
-    font-size: 32px;
-    line-height: 1.6;
-    max-width: 90%;
+.slide{
+  position:absolute;
+  width:100%;
+  height:100%;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  padding:20px;
+  opacity:0;
+  transition:1s ease;
 }
 
-p {
-    font-size: 20px;
-    line-height: 1.8;
-    max-width: 90%;
+.slide.active{
+  opacity:1;
 }
 
-/* button */
-button {
-    margin-top: 30px;
-    padding: 12px 25px;
-    border: none;
-    border-radius: 25px;
-    background: rgba(255,255,255,0.9);
-    color: black;
-    font-size: 16px;
-    cursor: pointer;
+h1{
+  font-size:28px;
+  margin-bottom:20px;
 }
 
-/* gallery */
-.gallery {
-    display: flex;
-    gap: 15px;
-    overflow-x: auto;
-    padding: 10px;
-    scroll-snap-type: x mandatory;
+p{
+  font-size:18px;
+  line-height:1.6;
+  max-width:700px;
 }
 
-.gallery img {
-    width: 220px;
-    border-radius: 15px;
-    flex-shrink: 0;
-    scroll-snap-align: center;
-    filter: grayscale(100%) brightness(90%);
+img{
+  width:200px;
+  border-radius:15px;
+  margin-top:15px;
+  box-shadow:0 0 20px rgba(255,255,255,0.2);
 }
 
-/* images animation */
-img {
-    margin-top: 20px;
-    opacity: 0;
-    transform: scale(0.9);
-    transition: 1.5s;
-}
-
-.section.show img {
-    opacity: 1;
-    transform: scale(1);
+.small{
+  font-size:14px;
+  opacity:0.7;
+  margin-bottom:10px;
 }
 </style>
 </head>
 
 <body>
 
-<div class="sky"></div>
 <div class="stars"></div>
+<div class="aurora"></div>
 
-<audio id="music" loop>
-<source src="music.mp3" type="audio/mpeg">
-</audio>
+<div class="small">for you, Abdelrahman.</div>
 
-<!-- 1 -->
-<div class="section show">
-    <h1>Happy birthday to one of the most genuine souls I’ve ever known.</h1>
-    <button onclick="next()">start</button>
+<!-- SLIDE 1 -->
+<div class="slide active">
+  <h1>Happy Birthday to the most amazing person ever</h1>
+  <img src="photo3.jpg" />
 </div>
 
-<!-- 2 -->
-<div class="section">
-    <h1>I don’t know if you’ll ever know who this is…<br>but I hope you feel it.</h1>
-    <button onclick="next()">continue</button>
+<!-- SLIDE 2 -->
+<div class="slide">
+<p>✨ Opening</p>
+
+<p>"I don’t know if you’ll ever know who this is, but I hope you feel this."</p>
 </div>
 
-<!-- 3 -->
-<div class="section">
-    <p>
-    I just wanted to say that you’ve always been someone really special to me.<br><br>
-    You changed something in my life without even trying… you made me see things differently,<br>
-    made life feel a little lighter, a little better.
-    </p>
-    <button onclick="next()">...</button>
+<!-- SLIDE 3 -->
+<div class="slide">
+<p>💌 Main message</p>
+
+<p>"I just wanted to say that you’ve always been someone really special to me.
+You changed something in my life without even trying… you made me see things differently, made life feel a little lighter, a little better.
+(There’s something about you… different.)
+You’re not like everyone else, and I hope you never become like them.
+I won’t talk about the moments we had… I think I’ll keep those to myself. But they meant more than you know."</p>
 </div>
 
-<!-- 4 -->
-<div class="section">
-    <p>
-    There’s something about you that feels real in a way that’s hard to find.<br><br>
-    You’re not like everyone else, and I hope you never become like them.
-    </p>
-    <button onclick="next()">...</button>
+<!-- SLIDE 4 -->
+<div class="slide">
+<p>💭 Things I love about you</p>
+
+<p>"Your smile, the mark on your hand , the way you talk, your kind heart, your smell, and your taste in music."</p>
+
+<img src="photo1.jpg" />
+<img src="photo2.jpg" />
 </div>
 
-<!-- 5 -->
-<div class="section">
-    <p>
-    I won’t talk about the moments we had… I think I’ll keep those to myself.<br>
-    But they meant more than you know.
-    </p>
-    <button onclick="next()">next</button>
+<!-- SLIDE 5 -->
+<div class="slide">
+<p>🫧 Soft emotional part</p>
+
+<p>"No matter what happens, you’ll always be someone important to me.
+You were good to me, and I’ll never forget that.
+You were more than just someone in my life… you were home in a way."</p>
 </div>
 
-<!-- 6 (✨ الصور بالعرض) -->
-<div class="section">
-    <h1>Things I love about you</h1>
-    <p>
-    Your laugh<br>
-    The way you talk<br>
-    Your kind heart<br>
-    That little mark on your hand<br>
-    The way you smell<br>
-    Your music taste
-    </p>
+<!-- SLIDE 6 -->
+<div class="slide">
+<p>🌍 Wishes for you</p>
 
-    <div class="gallery">
-        <img src="photo1.jpg">
-        <img src="photo2.jpg">
-    </div>
-
-    <button onclick="next()">continue</button>
+<p>"I really hope life is kind to you.
+And even if it isn’t sometimes… I hope you still find your way to happiness.
+I hope you never feel alone.
+And if you ever do, I hope it doesn’t stay for long.
+I hope your future is everything you dream of…
+that you succeed, travel the world, make money, laugh a lot… and just live a beautiful life."</p>
 </div>
 
-<!-- 7 -->
-<div class="section">
-    <p>
-    You’ll always be someone important to me, no matter what happens.<br><br>
-    You were kind to me in ways I’ll never forget.<br>
-    You were never just someone in my life… you felt like home.
-    </p>
-    <button onclick="next()">...</button>
-</div>
+<!-- SLIDE 7 -->
+<div class="slide">
+<p>🕊️ Ending</p>
 
-<!-- 8 -->
-<div class="section">
-    <p>
-    I really hope life is kind to you.<br><br>
-    And even when it isn’t… I hope you still find your way back to happiness.<br><br>
-    I hope you never feel alone.<br>
-    And if you ever do, I hope it doesn’t last.
-    </p>
-    <button onclick="next()">...</button>
-</div>
-
-<!-- 9 -->
-<div class="section">
-    <p>
-    I hope your future becomes everything you’ve ever dreamed of…<br><br>
-    that you succeed, travel the world, make good money,<br>
-    laugh often… and live a life that feels truly yours.
-    </p>
-    <button onclick="next()">almost there</button>
-</div>
-
-<!-- 10 -->
-<div class="section">
-    <h1>Maybe we won’t meet again…</h1>
-</div>
-
-<!-- 11 -->
-<div class="section">
-    <h1>
-    but I’ll always remember you.<br><br>
-    Some people leave a mark on your life…<br>
-    and you’re one of them.
-    </h1>
+<p>"Maybe we won’t meet again…
+but I’ll always remember you, and every little thing that once meant everything.
+I just hope life isn’t too hard on you.
+And that somehow… you stay happy.
+Some people just leave a mark on your life…
+and you’re one of them❤️"</p>
 </div>
 
 <script>
-let sections = document.querySelectorAll('.section');
-let i = 0;
+const slides = document.querySelectorAll(".slide");
+let index = 0;
 
-function next(){
-    document.getElementById("music").play();
-    sections[i].classList.remove("show");
-    i++;
-    if(i < sections.length){
-        sections[i].classList.add("show");
-    }
-}
+document.body.addEventListener("click", () => {
+  slides[index].classList.remove("active");
+  index = (index + 1) % slides.length;
+  slides[index].classList.add("active");
+});
 </script>
 
 </body>
