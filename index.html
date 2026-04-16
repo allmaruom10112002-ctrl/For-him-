@@ -22,7 +22,7 @@ body{
   color:white;
 }
 
-/* ===== REAL DEPTH STARS ===== */
+/* ===== STARS REALISTIC ===== */
 .stars{
   position:absolute;
   width:100%;
@@ -37,55 +37,45 @@ body{
   height:2px;
   background:white;
   border-radius:50%;
-  opacity:0.7;
-  animation: twinkle 4s infinite alternate ease-in-out, floatStar 15s linear infinite;
+  opacity:0.8;
+  animation: twinkle 4s infinite alternate, drift 10s linear infinite;
 }
 
 @keyframes twinkle{
-  0%{opacity:0.2;}
-  100%{opacity:1;}
+  from{opacity:0.2;}
+  to{opacity:1;}
 }
 
-@keyframes floatStar{
+@keyframes drift{
   0%{transform:translateY(0);}
-  100%{transform:translateY(-40px);}
+  100%{transform:translateY(-20px);}
 }
 
-/* ===== REALISTIC SHOOTING STARS ===== */
+/* ===== REAL SHOOTING STARS (dots like sky) ===== */
 .shooting-star{
   position:absolute;
-  width:2px;
-  height:2px;
+  width:3px;
+  height:3px;
   background:white;
   border-radius:50%;
-  box-shadow: 0 0 10px 3px rgba(255,255,255,0.8);
   opacity:0;
   animation: shoot 6s linear infinite;
-}
-
-.shooting-star::after{
-  content:"";
-  position:absolute;
-  width:120px;
-  height:2px;
-  background:linear-gradient(90deg, rgba(255,255,255,0.9), transparent);
-  transform:translateX(-120px);
-  filter: blur(1px);
+  box-shadow:0 0 6px white;
 }
 
 @keyframes shoot{
   0%{
-    transform:translate(120vw, -10vh);
+    transform:translateX(100vw) translateY(0);
     opacity:0;
   }
   5%{opacity:1;}
   100%{
-    transform:translate(-20vw, 60vh);
+    transform:translateX(-10vw) translateY(40vh);
     opacity:0;
   }
 }
 
-/* AURORA */
+/* aurora */
 .aurora{
   position:absolute;
   width:100%;
@@ -102,7 +92,7 @@ body{
   50%{transform:translateY(-20px);}
 }
 
-/* SLIDES */
+/* slides */
 .slide{
   position:absolute;
   width:100%;
@@ -134,28 +124,62 @@ img{
   margin-top:15px;
   box-shadow:0 0 20px rgba(255,255,255,0.2);
 }
+
+.small{
+  font-size:14px;
+  opacity:0.7;
+  position:absolute;
+  top:15px;
+  width:100%;
+  text-align:center;
+  z-index:3;
+}
+
+/* intro */
+.intro{
+  position:absolute;
+  width:100%;
+  height:100%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  background: radial-gradient(circle at top, #0b1b3a, #050816);
+  z-index:10;
+  cursor:pointer;
+}
 </style>
 </head>
 
 <body>
 
+<!-- INTRO SCREEN -->
+<div class="intro" id="intro">
+  <h2>Click to enter</h2>
+</div>
+
 <div class="stars" id="stars"></div>
 <div class="aurora"></div>
 
-<!-- shooting stars -->
-<div class="shooting-star" style="top:20%; animation-delay:0s;"></div>
-<div class="shooting-star" style="top:50%; animation-delay:3s;"></div>
-<div class="shooting-star" style="top:70%; animation-delay:5s;"></div>
+<div class="small">for you, Abdelrahman</div>
 
+<!-- shooting dots -->
+<div class="shooting-star" style="top:20%; animation-delay:0s;"></div>
+<div class="shooting-star" style="top:50%; animation-delay:2s;"></div>
+<div class="shooting-star" style="top:70%; animation-delay:4s;"></div>
+
+<!-- 1 -->
 <div class="slide active">
   <p>Happy Birthday to the most amazing person ever</p>
   <img src="photo3.jpg" />
 </div>
 
+<!-- 2 -->
 <div class="slide">
 <p>I don’t know if you’ll ever know who this is but I hope you feel this</p>
 </div>
 
+<!-- 3 -->
 <div class="slide">
 <p>
 I just wanted to say that you’ve always been someone really special to me
@@ -166,6 +190,7 @@ I won’t talk about the moments we had… I think I’ll keep those to myself B
 </p>
 </div>
 
+<!-- 4 -->
 <div class="slide">
 <p>💙 Things I love about you</p>
 
@@ -176,6 +201,7 @@ Your smile the mark on your hand the way you talk your kind heart your smell you
 <img src="photo1.jpg" />
 </div>
 
+<!-- 5 -->
 <div class="slide">
 <p>
 No matter what happens you’ll always be someone important to me
@@ -183,6 +209,7 @@ You were good to me and I’ll never forget that
 </p>
 </div>
 
+<!-- 6 -->
 <div class="slide">
 <p>
 I really hope life is kind to you
@@ -194,6 +221,7 @@ that you succeed travel the world make money laugh a lot… and just live a beau
 </p>
 </div>
 
+<!-- 7 -->
 <div class="slide">
 <p>
 Maybe we won’t meet again
@@ -206,14 +234,20 @@ and you’re one of them❤️
 </div>
 
 <script>
+// intro click
+document.getElementById("intro").addEventListener("click", ()=>{
+  document.getElementById("intro").style.display="none";
+});
+
 // stars
 const starsContainer = document.getElementById("stars");
 
-for(let i=0;i<150;i++){
+for(let i=0;i<120;i++){
   const s = document.createElement("div");
   s.className = "star";
   s.style.left = Math.random()*100 + "vw";
   s.style.top = Math.random()*100 + "vh";
+  s.style.animationDuration = (2 + Math.random()*3) + "s";
   starsContainer.appendChild(s);
 }
 
@@ -222,6 +256,7 @@ const slides = document.querySelectorAll(".slide");
 let index = 0;
 
 document.body.addEventListener("click", () => {
+  if(document.getElementById("intro").style.display !== "none") return;
   slides[index].classList.remove("active");
   index = (index + 1) % slides.length;
   slides[index].classList.add("active");
