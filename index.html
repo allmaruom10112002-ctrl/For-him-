@@ -22,26 +22,40 @@ body{
   color:white;
 }
 
-/* stars */
-.stars, .stars:after {
-  content:"";
+/* ===== STARS FIXED ===== */
+.stars{
   position:absolute;
-  top:0;
-  left:0;
   width:100%;
   height:100%;
   background: transparent;
-  box-shadow:
-  20px 30px white, 120px 80px white, 200px 150px white,
-  300px 200px white, 400px 50px white, 600px 300px white,
-  800px 100px white, 900px 400px white;
-  animation: moveStars 60s linear infinite;
-  opacity:0.5;
+  z-index:0;
 }
 
-@keyframes moveStars{
-  from{transform:translateY(0);}
-  to{transform:translateY(-200px);}
+.stars::before{
+  content:"";
+  position:absolute;
+  width:2px;
+  height:2px;
+  background:white;
+  box-shadow:
+  10vw 10vh white,
+  20vw 30vh white,
+  30vw 80vh white,
+  50vw 20vh white,
+  70vw 60vh white,
+  80vw 40vh white,
+  90vw 70vh white,
+  60vw 90vh white,
+  40vw 50vh white,
+  25vw 60vh white,
+  15vw 75vh white,
+  85vw 15vh white;
+  animation: twinkle 3s infinite alternate;
+}
+
+@keyframes twinkle{
+  from{opacity:0.3;}
+  to{opacity:1;}
 }
 
 /* aurora */
@@ -53,6 +67,7 @@ body{
               radial-gradient(circle at 70% 60%, rgba(120,0,255,0.2), transparent 50%);
   filter: blur(40px);
   animation: float 8s ease-in-out infinite;
+  z-index:0;
 }
 
 @keyframes float{
@@ -72,21 +87,17 @@ body{
   padding:20px;
   opacity:0;
   transition:1s ease;
+  z-index:2;
 }
 
 .slide.active{
   opacity:1;
 }
 
-h1{
-  font-size:28px;
-  margin-bottom:20px;
-}
-
 p{
   font-size:18px;
-  line-height:1.6;
-  max-width:700px;
+  line-height:1.7;
+  max-width:750px;
 }
 
 img{
@@ -100,6 +111,11 @@ img{
   font-size:14px;
   opacity:0.7;
   margin-bottom:10px;
+  position:absolute;
+  top:15px;
+  width:100%;
+  text-align:center;
+  z-index:3;
 }
 </style>
 </head>
@@ -111,23 +127,19 @@ img{
 
 <div class="small">for you, Abdelrahman.</div>
 
-<!-- SLIDE 1 -->
+<!-- 1 -->
 <div class="slide active">
-  <h1>Happy Birthday to the most amazing person ever</h1>
+  <p>Happy Birthday to the most amazing person ever</p>
   <img src="photo3.jpg" />
 </div>
 
-<!-- SLIDE 2 -->
+<!-- 2 -->
 <div class="slide">
-<p>✨ Opening</p>
-
 <p>"I don’t know if you’ll ever know who this is, but I hope you feel this."</p>
 </div>
 
-<!-- SLIDE 3 -->
+<!-- 3 -->
 <div class="slide">
-<p>💌 Main message</p>
-
 <p>"I just wanted to say that you’ve always been someone really special to me.
 You changed something in my life without even trying… you made me see things differently, made life feel a little lighter, a little better.
 (There’s something about you… different.)
@@ -135,29 +147,23 @@ You’re not like everyone else, and I hope you never become like them.
 I won’t talk about the moments we had… I think I’ll keep those to myself. But they meant more than you know."</p>
 </div>
 
-<!-- SLIDE 4 -->
+<!-- 4 -->
 <div class="slide">
-<p>💭 Things I love about you</p>
-
 <p>"Your smile, the mark on your hand , the way you talk, your kind heart, your smell, and your taste in music."</p>
 
 <img src="photo1.jpg" />
 <img src="photo2.jpg" />
 </div>
 
-<!-- SLIDE 5 -->
+<!-- 5 -->
 <div class="slide">
-<p>🫧 Soft emotional part</p>
-
 <p>"No matter what happens, you’ll always be someone important to me.
 You were good to me, and I’ll never forget that.
 You were more than just someone in my life… you were home in a way."</p>
 </div>
 
-<!-- SLIDE 6 -->
+<!-- 6 -->
 <div class="slide">
-<p>🌍 Wishes for you</p>
-
 <p>"I really hope life is kind to you.
 And even if it isn’t sometimes… I hope you still find your way to happiness.
 I hope you never feel alone.
@@ -166,10 +172,8 @@ I hope your future is everything you dream of…
 that you succeed, travel the world, make money, laugh a lot… and just live a beautiful life."</p>
 </div>
 
-<!-- SLIDE 7 -->
+<!-- 7 -->
 <div class="slide">
-<p>🕊️ Ending</p>
-
 <p>"Maybe we won’t meet again…
 but I’ll always remember you, and every little thing that once meant everything.
 I just hope life isn’t too hard on you.
