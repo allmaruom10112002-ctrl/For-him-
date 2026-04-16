@@ -22,7 +22,7 @@ body{
   color:white;
 }
 
-/* ===== STARS REALISTIC ===== */
+/* ===== STARS ===== */
 .stars{
   position:absolute;
   width:100%;
@@ -38,29 +38,24 @@ body{
   background:white;
   border-radius:50%;
   opacity:0.8;
-  animation: twinkle 4s infinite alternate, drift 10s linear infinite;
+  animation: twinkle 3s infinite alternate;
 }
 
 @keyframes twinkle{
-  from{opacity:0.2;}
-  to{opacity:1;}
+  from{opacity:0.2; transform:scale(0.8);}
+  to{opacity:1; transform:scale(1.3);}
 }
 
-@keyframes drift{
-  0%{transform:translateY(0);}
-  100%{transform:translateY(-20px);}
-}
-
-/* ===== REAL SHOOTING STARS (dots like sky) ===== */
+/* ===== SHOOTING STARS REAL ===== */
 .shooting-star{
   position:absolute;
   width:3px;
   height:3px;
   background:white;
   border-radius:50%;
-  opacity:0;
-  animation: shoot 6s linear infinite;
   box-shadow:0 0 6px white;
+  opacity:0;
+  animation: shoot 7s linear infinite;
 }
 
 @keyframes shoot{
@@ -70,7 +65,7 @@ body{
   }
   5%{opacity:1;}
   100%{
-    transform:translateX(-10vw) translateY(40vh);
+    transform:translateX(-20vw) translateY(40vh);
     opacity:0;
   }
 }
@@ -153,9 +148,9 @@ img{
 
 <body>
 
-<!-- INTRO SCREEN -->
+<!-- INTRO -->
 <div class="intro" id="intro">
-  <h2>Click to enter</h2>
+  <h2>Click to enter your world</h2>
 </div>
 
 <div class="stars" id="stars"></div>
@@ -163,10 +158,10 @@ img{
 
 <div class="small">for you, Abdelrahman</div>
 
-<!-- shooting dots -->
+<!-- shooting stars -->
 <div class="shooting-star" style="top:20%; animation-delay:0s;"></div>
-<div class="shooting-star" style="top:50%; animation-delay:2s;"></div>
-<div class="shooting-star" style="top:70%; animation-delay:4s;"></div>
+<div class="shooting-star" style="top:50%; animation-delay:3s;"></div>
+<div class="shooting-star" style="top:70%; animation-delay:5s;"></div>
 
 <!-- 1 -->
 <div class="slide active">
@@ -234,9 +229,16 @@ and you’re one of them❤️
 </div>
 
 <script>
-// intro click
-document.getElementById("intro").addEventListener("click", ()=>{
-  document.getElementById("intro").style.display="none";
+// intro fix (SAFE)
+const intro = document.getElementById("intro");
+const slides = document.querySelectorAll(".slide");
+
+let index = 0;
+let started = false;
+
+intro.addEventListener("click", () => {
+  intro.style.display = "none";
+  started = true;
 });
 
 // stars
@@ -252,11 +254,9 @@ for(let i=0;i<120;i++){
 }
 
 // slides
-const slides = document.querySelectorAll(".slide");
-let index = 0;
-
 document.body.addEventListener("click", () => {
-  if(document.getElementById("intro").style.display !== "none") return;
+  if(!started) return;
+
   slides[index].classList.remove("active");
   index = (index + 1) % slides.length;
   slides[index].classList.add("active");
