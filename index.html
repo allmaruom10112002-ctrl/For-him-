@@ -1,186 +1,222 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Birthday</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For You</title>
 
 <style>
-body{
-  margin:0;
-  font-family: Arial;
-  color:white;
-  background: linear-gradient(to bottom,#050b2c,#0b2a6f);
-  overflow:hidden;
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    color: #eaefff;
+    text-align: center;
+    overflow: hidden;
 }
 
-/* stars */
-.stars{
-  position:fixed;
-  width:100%;
-  height:100%;
-  z-index:0;
+/* 🌌 background */
+.sky {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, #020111, #050a2a, #0a1a4f);
+    z-index: -2;
 }
 
-.star{
-  position:absolute;
-  width:2px;
-  height:2px;
-  background:white;
-  border-radius:50%;
-  animation: twinkle 3s infinite;
+.stars {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: url('https://i.imgur.com/YKY28eT.png') repeat;
+    animation: moveStars 200s linear infinite;
+    z-index: -1;
+    opacity: 0.8;
 }
 
-@keyframes twinkle{
-  0%,100%{opacity:0.2}
-  50%{opacity:1}
+@keyframes moveStars {
+    from {background-position: 0 0;}
+    to {background-position: 10000px 5000px;}
 }
 
-/* slide fix IMPORTANT */
-.slide{
-  position:absolute;
-  width:100%;
-  height:100vh;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  text-align:center;
-  padding:20px;
-  box-sizing:border-box;
-  z-index:2;
-  background: rgba(0,0,0,0.25); /* 👈 ده اللي بيخلي كل حاجة تبان */
+/* sections */
+.section {
+    height: 100vh;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 25px;
 }
 
-.hidden{display:none;}
-
-h1{font-size:32px;}
-p{font-size:20px;line-height:1.6;max-width:90%;}
-
-button{
-  margin-top:20px;
-  padding:10px 18px;
-  border:none;
-  border-radius:20px;
-  background:absolute;
-  color:#0b2a6f;
-  font-weight:bold;
+.section.show {
+    display: flex;
 }
 
-.img-row{
-  display:flex;
-  gap:10px;
-  margin-top:10px;
+/* text */
+h1 {
+    font-size: 32px;
+    line-height: 1.6;
+    max-width: 90%;
 }
 
-.img-box{
-  width:90px;
-  height:90px;
-  border:2px solid white;
-  border-radius:10px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:12px;
+p {
+    font-size: 20px;
+    line-height: 1.8;
+    max-width: 90%;
 }
 
-/* final text */
-#finalText{
-  font-size:42px;
-  opacity:0;
-  transition:2s;
+/* button */
+button {
+    margin-top: 30px;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 25px;
+    background: rgba(255,255,255,0.9);
+    color: black;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+/* images */
+img {
+    width: 260px;
+    margin-top: 20px;
+    border-radius: 15px;
+    filter: grayscale(100%) brightness(90%);
+    opacity: 0;
+    transform: scale(0.9);
+    transition: 1.5s;
+}
+
+.section.show img {
+    opacity: 1;
+    transform: scale(1);
 }
 </style>
 </head>
 
 <body>
 
-<div class="stars" id="stars"></div>
+<div class="sky"></div>
+<div class="stars"></div>
+
+<audio id="music" loop>
+<source src="music.mp3" type="audio/mpeg">
+</audio>
 
 <!-- 1 -->
-<div class="slide" id="s1">
-  <h1>Happy Birthday ✨</h1>
-  <p>To the most amazing person ever</p>
-  <button onclick="next(1)">Start</button>
+<div class="section show">
+    <h1>Happy birthday to one of the most genuine souls I’ve ever known.</h1>
+    <button onclick="next()">start</button>
 </div>
 
 <!-- 2 -->
-<div class="slide hidden" id="s2">
-  <h1>💌</h1>
-  <p>
-  I don’t know if you’ll ever know who this is… but I hope you feel this.<br><br>
-
-  You changed my life without even trying.<br>
-  There’s something about you that feels unforgettable.<br><br>
-
-  You’re not like anyone else… and I hope you never become like them.
-  </p>
-  <button onclick="next(2)">Next</button>
+<div class="section">
+    <h1>I don’t know if you’ll ever know who this is…<br>but I hope you feel it.</h1>
+    <button onclick="next()">continue</button>
 </div>
 
 <!-- 3 -->
-<div class="slide hidden" id="s3">
-  <h1>Things I love 💙</h1>
-  <p>Your smile, your voice, your kindness, your music taste</p>
-
-  <div class="img-row">
-    <div class="img-box">Smile (2)</div>
-    <div class="img-box">Hand mark (1)</div>
-    <div class="img-box">Music (3)</div>
-  </div>
-
-  <button onclick="next(3)">Next</button>
+<div class="section">
+    <p>
+    I just wanted to say that you’ve always been someone really special to me.<br><br>
+    You changed something in my life without even trying… you made me see things differently,<br>
+    made life feel a little lighter, a little better.
+    </p>
+    <button onclick="next()">...</button>
 </div>
 
 <!-- 4 -->
-<div class="slide hidden" id="s4">
-  <p>
-  You were more than someone…<br>
-  you were home.
-  </p>
-  <button onclick="next(4)">Next</button>
+<div class="section">
+    <p>
+    There’s something about you that feels real in a way that’s hard to find.<br><br>
+    You’re not like everyone else, and I hope you never become like them.
+    </p>
+    <button onclick="next()">...</button>
 </div>
 
 <!-- 5 -->
-<div class="slide hidden" id="s5">
-  <p>
-  I hope life is kind to you.<br>
-  I hope you never feel alone.<br>
-  I hope you get everything you dream of.
-  </p>
-  <button onclick="next(5)">Finish</button>
+<div class="section">
+    <p>
+    I won’t talk about the moments we had… I think I’ll keep those to myself.<br>
+    But they meant more than you know.
+    </p>
+    <button onclick="next()">next</button>
 </div>
 
-<!-- FINAL -->
-<div class="slide hidden" id="s6">
-  <div id="finalText">You were home.</div>
+<!-- 6 -->
+<div class="section">
+    <h1>Things I love about you</h1>
+    <p>
+    Your laugh<br>
+    The way you talk<br>
+    Your kind heart<br>
+    That little mark on your hand<br>
+    The way you smell<br>
+    Your music taste
+    </p>
+    <img src="photo1.jpg">
+    <img src="photo2.jpg">
+    <button onclick="next()">continue</button>
+</div>
+
+<!-- 7 -->
+<div class="section">
+    <p>
+    You’ll always be someone important to me, no matter what happens.<br><br>
+    You were kind to me in ways I’ll never forget.<br>
+    You were never just someone in my life… you felt like home.
+    </p>
+    <button onclick="next()">...</button>
+</div>
+
+<!-- 8 -->
+<div class="section">
+    <p>
+    I really hope life is kind to you.<br><br>
+    And even when it isn’t… I hope you still find your way back to happiness.<br><br>
+    I hope you never feel alone.<br>
+    And if you ever do, I hope it doesn’t last.
+    </p>
+    <button onclick="next()">...</button>
+</div>
+
+<!-- 9 -->
+<div class="section">
+    <p>
+    I hope your future becomes everything you’ve ever dreamed of…<br><br>
+    that you succeed, travel the world, make good money,<br>
+    laugh often… and live a life that feels truly yours.
+    </p>
+    <button onclick="next()">almost there</button>
+</div>
+
+<!-- 10 -->
+<div class="section">
+    <h1>Maybe we won’t meet again…</h1>
+</div>
+
+<!-- 11 -->
+<div class="section">
+    <h1>
+    but I’ll always remember you.<br><br>
+    Some people leave a mark on your life…<br>
+    and you’re one of them.
+    </h1>
 </div>
 
 <script>
+let sections = document.querySelectorAll('.section');
+let i = 0;
 
-/* stars */
-const stars=document.getElementById("stars");
-for(let i=0;i<100;i++){
-  let s=document.createElement("div");
-  s.className="star";
-  s.style.top=Math.random()*100+"%";
-  s.style.left=Math.random()*100+"%";
-  s.style.animationDuration=(2+Math.random()*3)+"s";
-  stars.appendChild(s);
+function next(){
+    document.getElementById("music").play();
+    sections[i].classList.remove("show");
+    i++;
+    if(i < sections.length){
+        sections[i].classList.add("show");
+    }
 }
-
-/* navigation */
-function next(n){
-  document.getElementById("s"+n).classList.add("hidden");
-  document.getElementById("s"+(n+1)).classList.remove("hidden");
-
-  if(n===5){
-    setTimeout(()=>{
-      document.getElementById("finalText").style.opacity=1;
-    },500);
-  }
-}
-
 </script>
 
 </body>
