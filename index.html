@@ -22,7 +22,7 @@ body{
   color:white;
 }
 
-/* ===== STARS ===== */
+/* ===== MOVING STARS ===== */
 .stars{
   position:absolute;
   width:100%;
@@ -38,7 +38,7 @@ body{
   background:white;
   border-radius:50%;
   opacity:0.8;
-  animation: twinkle 3s infinite alternate;
+  animation: twinkle 3s infinite alternate, drift 12s linear infinite;
 }
 
 @keyframes twinkle{
@@ -46,30 +46,35 @@ body{
   to{opacity:1; transform:scale(1.3);}
 }
 
-/* ===== SHOOTING STARS (FIXED CINEMATIC) ===== */
+@keyframes drift{
+  0%{transform:translateY(0);}
+  100%{transform:translateY(-20px);}
+}
+
+/* ===== SHOOTING STARS FIXED DIRECTION ===== */
 .shooting-star{
   position:absolute;
-  width:160px;
+  width:170px;
   height:2px;
   background:linear-gradient(90deg, white, transparent);
   opacity:0;
   transform:rotate(25deg);
-  animation: shoot 8s linear infinite;
+  animation: shoot 7s linear infinite;
 }
 
 @keyframes shoot{
   0%{
-    transform:translateX(-200px) translateY(0) rotate(25deg);
+    transform:translateX(120vw) translateY(0) rotate(25deg);
     opacity:0;
   }
   5%{opacity:1;}
   100%{
-    transform:translateX(120vw) translateY(40vh) rotate(25deg);
+    transform:translateX(-200px) translateY(40vh) rotate(25deg);
     opacity:0;
   }
 }
 
-/* ===== AURORA ===== */
+/* aurora */
 .aurora{
   position:absolute;
   width:100%;
@@ -86,7 +91,6 @@ body{
   50%{transform:translateY(-20px);}
 }
 
-/* ===== SLIDES ===== */
 .slide{
   position:absolute;
   width:100%;
@@ -136,7 +140,7 @@ img{
 <div class="stars" id="stars"></div>
 <div class="aurora"></div>
 
-<div class="small">for you, Abdelrahman.</div>
+<div class="small">for you, Abdelrahman</div>
 
 <!-- shooting stars -->
 <div class="shooting-star" style="top:20%; animation-delay:0s;"></div>
@@ -151,26 +155,26 @@ img{
 
 <!-- 2 -->
 <div class="slide">
-<p>"I don’t know if you’ll ever know who this is, but I hope you feel this."</p>
+<p>I don’t know if you’ll ever know who this is but I hope you feel this</p>
 </div>
 
 <!-- 3 -->
 <div class="slide">
 <p>
-"I just wanted to say that you’ve always been someone really special to me.
-You changed something in my life without even trying… you made me see things differently, made life feel a little lighter, a little better.
-(There’s something about you… different.)
-You’re not like everyone else, and I hope you never become like them.
-I won’t talk about the moments we had… I think I’ll keep those to myself. But they meant more than you know."
+I just wanted to say that you’ve always been someone really special to me
+You changed something in my life without even trying… you made me see things differently made life feel a little lighter a little better
+(There’s something about you… different)
+You’re not like everyone else and I hope you never become like them
+I won’t talk about the moments we had… I think I’ll keep those to myself But they meant more than you know
 </p>
 </div>
 
 <!-- 4 -->
 <div class="slide">
-<p>Things I love about you</p>
+<p>💙 Things I love about you</p>
 
 <p>
-Your smile, the mark on your hand, the way you talk, your kind heart, your smell, your taste in music, and your different personality.
+Your smile the mark on your hand the way you talk your kind heart your smell your taste in music and your different personality
 </p>
 
 <img src="photo1.jpg" />
@@ -179,46 +183,46 @@ Your smile, the mark on your hand, the way you talk, your kind heart, your smell
 <!-- 5 -->
 <div class="slide">
 <p>
-"No matter what happens, you’ll always be someone important to me.
-You were good to me, and I’ll never forget that.
-You were more than just someone in my life… you were home in a way."
+No matter what happens you’ll always be someone important to me
+You were good to me and I’ll never forget that
+You were more than just someone in my life… you were home in a way
 </p>
 </div>
 
 <!-- 6 -->
 <div class="slide">
 <p>
-"I really hope life is kind to you.
-And even if it isn’t sometimes… I hope you still find your way to happiness.
-I hope you never feel alone.
-And if you ever do, I hope it doesn’t stay for long.
-I hope your future is everything you dream of…
-that you succeed, travel the world, make money, laugh a lot… and just live a beautiful life."
+I really hope life is kind to you
+And even if it isn’t sometimes I hope you still find your way to happiness
+I hope you never feel alone
+And if you ever do I hope it doesn’t stay for long
+I hope your future is everything you dream of
+that you succeed travel the world make money laugh a lot… and just live a beautiful life
 </p>
 </div>
 
 <!-- 7 -->
 <div class="slide">
 <p>
-"Maybe we won’t meet again…
-but I’ll always remember you, and every little thing that once meant everything.
-I just hope life isn’t too hard on you.
-And that somehow… you stay happy.
-Some people just leave a mark on your life…
-and you’re one of them❤️"
+Maybe we won’t meet again
+but I’ll always remember you and every little thing that once meant everything
+I just hope life isn’t too hard on you
+And that somehow… you stay happy
+Some people just leave a mark on your life
+and you’re one of them❤️
 </p>
 </div>
 
 <script>
-// stars generator
+// stars movement
 const starsContainer = document.getElementById("stars");
 
-for(let i=0;i<100;i++){
+for(let i=0;i<120;i++){
   const s = document.createElement("div");
   s.className = "star";
   s.style.left = Math.random()*100 + "vw";
   s.style.top = Math.random()*100 + "vh";
-  s.style.animationDuration = (1 + Math.random()*3) + "s";
+  s.style.animationDuration = (2 + Math.random()*3) + "s, " + (8 + Math.random()*5) + "s";
   starsContainer.appendChild(s);
 }
 
